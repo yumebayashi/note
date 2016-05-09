@@ -199,7 +199,8 @@ SELECT *,
 FROM
   (SELECT * ,
           LAG(created_at, 1) OVER(PARTITION BY name ORDER BY created_at DESC) AS NEXT
-   FROM tmp_test)
+   FROM tmp_test);
+
 
 WITH t AS (
 SELECT * , 

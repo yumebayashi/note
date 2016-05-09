@@ -1,4 +1,4 @@
-Query Cheet Sheet in Postgres(RedShift)
+Query Cheet Sheet in RedShift(Postgres)
 
 ```
 CREATE TABLE tmp_test (

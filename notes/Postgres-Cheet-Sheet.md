@@ -165,7 +165,7 @@ ORDER BY name,created_at ASC;
  d    | 67.12917 | 952.42817 | 2016-05-09 04:46:49 |          3
  d    | 24.18907 | 299.34541 | 2016-05-09 05:00:30 |          4
 ```
-* get values from a previous row in the table. To return a value from the next row, using the LEAD function. below two queries return the same result.(order in over function is inversed)
+* get value from a previous row in the table. To get a value from the next row, using the LEAD function. below two queries return the same result.(order in over function is inversed)
 ```
  SELECT * , LAG(created_at, 1) OVER(PARTITION BY name ORDER BY created_at DESC) FROM tmp_test;
 

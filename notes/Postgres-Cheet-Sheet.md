@@ -29,7 +29,7 @@ select * from tmp_test order by name;
  c    | 33.33300 | 333.33000 | 2016-04-10 13:41:46
  d    | 44.44400 | 444.44000 | 2015-04-09 01:41:46
 ```
-
+---
 ```
 insert into tmp_test2 (name) select name from tmp_test
 ```
@@ -43,7 +43,7 @@ select * from tmp_test2;
  c    |        |        |
  d    |        |        |
 ```
-
+---
 ```
 create table tmp_test3 as select name,value1 from tmp_test;
 ```

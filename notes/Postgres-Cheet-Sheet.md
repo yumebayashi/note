@@ -17,7 +17,7 @@ INSERT INTO tmp_test (name,value1,value2,created_at) VALUES
 ('d',44.444, 444.44, getdate() - interval '1 year');
 
 ```
-you can omit (name,value1,value2,created_at)
+you can omit `(name,value1,value2,created_at)`
 if the number of column you INSERT and the table has are same and know the order of the columns in the table.
 
 ```S

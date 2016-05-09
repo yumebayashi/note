@@ -140,7 +140,12 @@ FROM
 
 * add sequential row number order by created_at for each name
 ```
-SELECT * , row_number() over(PARTITION BY name ORDER BY created_at asc) FROM tmp_test ORDER BY name, created_at ASC;
+SELECT * ,
+       row_number() over(PARTITION BY name ORDER BY created_at ASC)
+FROM tmp_test
+ORDER BY name,created_at ASC;
+```
+```
  name |  value1  |  value2   |     created_at      | row_number
 ------+----------+-----------+---------------------+------------
  a    |  2.79153 | 283.88840 | 2016-05-09 02:48:03 |          1
@@ -189,12 +194,17 @@ SELECT * , row_number() over(PARTITION BY name ORDER BY created_at asc) FROM tmp
 ```
 * get the time difference(min) between current and previous row
 ```
-SELECT *, EXTRACT(EPOCH FROM next - created_at) / 60  AS stay_min FROM (
-SELECT * , LAG(created_at, 1) OVER(PARTITION BY name ORDER BY created_at DESC) AS next FROM tmp_test
-)
+SELECT *,
+       EXTRACT(EPOCH FROM NEXT - created_at) / 60 AS stay_min
+FROM
+  (SELECT * ,
+          LAG(created_at, 1) OVER(PARTITION BY name ORDER BY created_at DESC) AS NEXT
+   FROM tmp_test)
 
 WITH t AS (
-SELECT * , LAG(created_at, 1) OVER(PARTITION BY name ORDER BY created_at DESC) AS next FROM tmp_test
+SELECT * , 
+       LAG(created_at, 1) OVER(PARTITION BY name ORDER BY created_at DESC) AS next 
+FROM tmp_test
 ) 
 SELECT extract(epoch FROM next - created_at) / 60  AS stay_min FROM t;
 ```

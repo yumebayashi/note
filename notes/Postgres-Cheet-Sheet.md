@@ -18,9 +18,9 @@ INSERT INTO tmp_test (name,value1,value2,created_at) VALUES
 
 ```
 you can omit `(name,value1,value2,created_at)`
-if the number of column you INSERT and the table has are same and know the order of the columns in the table.
+if the number of column you insert and the table has are same and know the order of the columns in the table.
 
-```S
+```
 SELECT * FROM tmp_test ORDER BY name;
  name |  value1  |  value2   |     created_at
 ------+----------+-----------+---------------------
@@ -57,8 +57,10 @@ SELECT * FROM tmp_test3 ORDER BY name;
  c    | 33.33300
  d    | 44.44400
 ```
+### window function
+
+* make initial data set
 ```
-make initial data set
 INSERT INTO tmp_test (name,value1,value2,created_at) VALUES
 ('a',random() * 100, random() * 1000, getdate() - (interval '1 second') * floor(random() * 10000)),
 ('a',random() * 100, random() * 1000, getdate() - (interval '1 second') * floor(random() * 10000)),
@@ -79,7 +81,7 @@ INSERT INTO tmp_test (name,value1,value2,created_at) VALUES
 ```
 
 ```
-dev=# SELECT * FROM tmp_test ORDER BY name,created_at;
+SELECT * FROM tmp_test ORDER BY name,created_at;
  name |  value1  |  value2   |     created_at
 ------+----------+-----------+---------------------
  a    |  2.79153 | 283.88840 | 2016-05-09 02:48:03
@@ -99,7 +101,7 @@ dev=# SELECT * FROM tmp_test ORDER BY name,created_at;
  d    | 67.12917 | 952.42817 | 2016-05-09 04:46:49
  d    | 24.18907 | 299.34541 | 2016-05-09 05:00:30
 ```
-value1とvalue2の差でflagをつける
+* add flag by the difference between value1 and value2
 
 ```
 SELECT *,
@@ -136,8 +138,9 @@ FROM
  d    | 24.18907 | 299.34541 | 2016-05-09 05:00:30 | 275.15634 |    3
 ```
 
+* add sequential row number order by created_at for each name
 ```
-dev=#  SELECT * , row_number() over(PARTITION BY name ORDER BY created_at asc) FROM tmp_test ORDER BY name, created_at ASC;
+SELECT * , row_number() over(PARTITION BY name ORDER BY created_at asc) FROM tmp_test ORDER BY name, created_at ASC;
  name |  value1  |  value2   |     created_at      | row_number
 ------+----------+-----------+---------------------+------------
  a    |  2.79153 | 283.88840 | 2016-05-09 02:48:03 |          1
@@ -157,11 +160,11 @@ dev=#  SELECT * , row_number() over(PARTITION BY name ORDER BY created_at asc) F
  d    | 67.12917 | 952.42817 | 2016-05-09 04:46:49 |          3
  d    | 24.18907 | 299.34541 | 2016-05-09 05:00:30 |          4
 ```
-
+* get values from a previous row in the table. To return a value from the next row, using the LEAD function. below two queries return the same result.(order in over function is inversed)
 ```
  SELECT * , LAG(created_at, 1) OVER(PARTITION BY name ORDER BY created_at DESC) FROM tmp_test;
 
- SELECT * , LEAD(created_at, 1) OVER(PARTITION BY name ORDER BY created_at ASC) FROM tmp_test ORDER BY name , created_at asc;
+ SELECT * , LEAD(created_at, 1) OVER(PARTITION BY name ORDER BY created_at ASC) FROM tmp_test;
 ```
 
 ```
@@ -184,7 +187,7 @@ dev=#  SELECT * , row_number() over(PARTITION BY name ORDER BY created_at asc) F
  d    | 67.12917 | 952.42817 | 2016-05-09 04:46:49 | 2016-05-09 05:00:30
  d    | 24.18907 | 299.34541 | 2016-05-09 05:00:30 |
 ```
-
+* get the time difference(min) between current and previous row
 ```
 SELECT *, EXTRACT(EPOCH FROM next - created_at) / 60  AS stay_min FROM (
 SELECT * , LAG(created_at, 1) OVER(PARTITION BY name ORDER BY created_at DESC) AS next FROM tmp_test

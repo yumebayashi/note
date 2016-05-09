@@ -195,10 +195,10 @@ ORDER BY name,created_at ASC;
 * get the time difference(min) between current and previous row
 ```
 SELECT *,
-       EXTRACT(EPOCH FROM NEXT - created_at) / 60 AS stay_min
+       EXTRACT(EPOCH FROM next - created_at) / 60 AS stay_min
 FROM
   (SELECT * ,
-          LAG(created_at, 1) OVER(PARTITION BY name ORDER BY created_at DESC) AS NEXT
+          LAG(created_at, 1) OVER(PARTITION BY name ORDER BY created_at DESC) AS next
    FROM tmp_test);
 
 

@@ -2,7 +2,7 @@ Title:Query Cheet Sheet in RedShift(Postgres)
 Date: 2016-05-10 10:00
 Category: tech
 Tags: sql,postgres,redshift
-Slug: technote
+Slug: query-cheet-sheet-2015-05-10
 Author: yumebayashi
 Summary: sql cheet sheet
 

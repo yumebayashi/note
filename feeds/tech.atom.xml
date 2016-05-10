@@ -1,5 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/tech.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-05-10T10:00:00+09:00</updated><entry><title>Query Cheet Sheet in RedShift(Postgres)</title><link href="http://yumebayashi.github.io/note/query-cheet-sheet-2015-05-10.html" rel="alternate"></link><published>2016-05-10T10:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-10:note/query-cheet-sheet-2015-05-10.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;CREATE TABLE tmp_test (
+<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/tech.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-05-10T18:00:00+09:00</updated><entry><title>RedShift Query Tips</title><link href="http://yumebayashi.github.io/note/redshift-query-tips-2016-05-10.html" rel="alternate"></link><published>2016-05-10T18:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-10:note/redshift-query-tips-2016-05-10.html</id><summary type="html">&lt;ul&gt;
+&lt;li&gt;Confirm table definition&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;select * from pg_table_def where tablename = &amp;#39;target_table&amp;#39;;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Check running query and its pid&lt;ul&gt;
+&lt;li&gt;terminate query -&amp;gt; &lt;code&gt;cancel {pid}&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;select pid,starttime, left(query,50) from stv_recents where status=&amp;#39;Running&amp;#39;;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Check whether the table needs to be vacuumed or not&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cm"&gt;/** 0.not vacuumed table */&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="kr"&gt;select&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="s"&gt;&amp;#39;0_not_sorted&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;status&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;sum_result&lt;span class="o"&gt;.&lt;/span&gt;tablename&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;sum_result&lt;span class="o"&gt;.&lt;/span&gt;sorted_rows&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;sum_result&lt;span class="o"&gt;.&lt;/span&gt;rows&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;cast&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;decimal&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;))&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;sort_percentage&lt;span class="w"&gt;&lt;/span&gt;
+from&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kr"&gt;select&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;trim&lt;span class="o"&gt;(&lt;/span&gt;name&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;tablename&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;sum&lt;span class="o"&gt;(&lt;/span&gt;sorted_rows&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;sorted_rows&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;sum&lt;span class="o"&gt;(&lt;/span&gt;rows&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;rows&lt;span class="w"&gt;&lt;/span&gt;
+from&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;stv_tbl_perm&lt;span class="w"&gt;&lt;/span&gt;
+group&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;by&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;name&lt;span class="w"&gt;&lt;/span&gt;
+order&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;by&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;name&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sum_result&lt;span class="w"&gt;&lt;/span&gt;
+where&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;sorted_rows&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+UNION&lt;span class="w"&gt; &lt;/span&gt;ALL&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="cm"&gt;/** 1.vacuumed table */&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="kr"&gt;select&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="s"&gt;&amp;#39;1_sorted&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;status&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;sum_result&lt;span class="o"&gt;.&lt;/span&gt;tablename&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;sum_result&lt;span class="o"&gt;.&lt;/span&gt;sorted_rows&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;sum_result&lt;span class="o"&gt;.&lt;/span&gt;rows&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;cast&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;cast&lt;span class="o"&gt;(&lt;/span&gt;sum_result&lt;span class="o"&gt;.&lt;/span&gt;sorted_rows&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;double&lt;span class="w"&gt; &lt;/span&gt;precision&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;cast&lt;span class="o"&gt;(&lt;/span&gt;sum_result&lt;span class="o"&gt;.&lt;/span&gt;rows&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;double&lt;span class="w"&gt; &lt;/span&gt;precision&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;decimal&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="m"&gt;3&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;sort_percentage&lt;span class="w"&gt;&lt;/span&gt;
+from&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="kr"&gt;select&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;trim&lt;span class="o"&gt;(&lt;/span&gt;name&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;tablename&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;sum&lt;span class="o"&gt;(&lt;/span&gt;sorted_rows&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;sorted_rows&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;sum&lt;span class="o"&gt;(&lt;/span&gt;rows&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;as&lt;span class="w"&gt; &lt;/span&gt;rows&lt;span class="w"&gt;&lt;/span&gt;
+from&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;stv_tbl_perm&lt;span class="w"&gt;&lt;/span&gt;
+group&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;by&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;name&lt;span class="w"&gt;&lt;/span&gt;
+order&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;by&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;name&lt;span class="o"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;sum_result&lt;span class="w"&gt;&lt;/span&gt;
+where&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;sorted_rows&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;!&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+order&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kr"&gt;by&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;status&lt;span class="w"&gt; &lt;/span&gt;asc&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;sort_percentage&lt;span class="w"&gt; &lt;/span&gt;asc&lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;rows&lt;span class="w"&gt; &lt;/span&gt;desc&lt;span class="err"&gt;;&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;returns like below&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    status    |             tablename              | sorted_rows |    rows     | sort_percentage
+--------------+------------------------------------+-------------+-------------+-----------------
+ 0_not_sorted | hogehoge_table_0                   |           0 |    40980633 |           0.000
+ 0_not_sorted | hogehoge_table_1                   |           0 |      108008 |           0.000
+ 0_not_sorted | hogehoge_table_2                   |           0 |        5002 |           0.000
+ 0_not_sorted | hogehoge_table_3                   |           0 |        4000 |           0.000
+ 0_not_sorted | hogehoge_table_4                   |           0 |        1480 |           0.000
+ 1_sorted     | hogehoge_table_5                   |        1586 |       17003 |           0.093
+ 1_sorted     | hogehoge_table_6                   |    21258371 |   170611094 |           0.125
+ 1_sorted     | hogehoge_table_7                   |           1 |           2 |           0.500
+ 1_sorted     | hogehoge_table_8                   |     2037917 |     3253190 |           0.626
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="redshift"></category></entry><entry><title>Query Cheet Sheet in RedShift(Postgres)</title><link href="http://yumebayashi.github.io/note/query-cheet-sheet-2015-05-10.html" rel="alternate"></link><published>2016-05-10T10:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-10:note/query-cheet-sheet-2015-05-10.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;CREATE TABLE tmp_test (
    name character varying(255),
    value1 numeric(8,5),
    value2 numeric(8,5),

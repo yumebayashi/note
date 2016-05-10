@@ -3,7 +3,8 @@
 <head>
         <meta charset="utf-8" />
         <title>Query Cheet Sheet in RedShift(Postgres)</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+        <link rel="stylesheet" href="http://yumebayashi.github.io/note/theme/css/main.css" />
+        <link href="http://yumebayashi.github.io/note/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="yumebayashi's note Atom Feed" />
 
         <!--[if IE]>
             <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -12,16 +13,16 @@
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="/">yumebayashi's note </a></h1>
+                <h1><a href="http://yumebayashi.github.io/note/">yumebayashi's note </a></h1>
                 <nav><ul>
-                    <li class="active"><a href="/category/tech.html">tech</a></li>
+                    <li class="active"><a href="http://yumebayashi.github.io/note/category/tech.html">tech</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="/query-cheet-sheet-2015-05-10.html" rel="bookmark"
+        <a href="http://yumebayashi.github.io/note/query-cheet-sheet-2015-05-10.html" rel="bookmark"
            title="Permalink to Query Cheet Sheet in RedShift(Postgres)">Query Cheet Sheet in RedShift(Postgres)</a></h1>
     </header>
 
@@ -32,10 +33,10 @@
         </abbr>
 
         <address class="vcard author">
-                By                         <a class="url fn" href="/author/yumebayashi.html">yumebayashi</a>
+                By                         <a class="url fn" href="http://yumebayashi.github.io/note/author/yumebayashi.html">yumebayashi</a>
         </address>
-<p>In <a href="/category/tech.html">tech</a>.</p>
-<p>tags: <a href="/tag/sql.html">sql</a> <a href="/tag/postgres.html">postgres</a> <a href="/tag/redshift.html">redshift</a> </p>
+<p>In <a href="http://yumebayashi.github.io/note/category/tech.html">tech</a>.</p>
+<p>tags: <a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a> <a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a> <a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a> </p>
 </footer><!-- /.post-info -->      <div class="highlight"><pre><span></span>CREATE TABLE tmp_test (
    name character varying(255),
    value1 numeric(8,5),
@@ -297,6 +298,7 @@ SELECT extract(epoch FROM next - created_at) / 60  AS stay_min FROM t;
                 <div class="social">
                         <h2>social</h2>
                         <ul>
+                            <li><a href="http://yumebayashi.github.io/note/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
                             <li><a href="#">You can add links in your config file</a></li>
                             <li><a href="#">Another social link</a></li>

@@ -39,3 +39,4 @@ DEFAULT_PAGINATION = 10
 THEME = './pelican-octopress-theme-master'
 
 SEARCH_BOX = True
+MENUITEMS = (('Profile','https://github.com/yumebayashi/note/tree/profile'),)

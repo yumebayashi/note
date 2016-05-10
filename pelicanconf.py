@@ -36,4 +36,6 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 
 #THEME
-THEME = './pelican-blueidea-master'
+THEME = './pelican-octopress-theme-master'
+
+SEARCH_BOX = True

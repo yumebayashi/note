@@ -9,4 +9,3 @@ output/*
 ## Mac OS X
 .DS_Store
 
-pelican-plugins/*

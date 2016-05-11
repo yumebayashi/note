@@ -1,10 +1,9 @@
 Title:RedShift Query Tips
-Date: 2016-05-10 18:00
+Date: 2016-05-09
 Category: tech
 Tags: redshift
-Slug: redshift-query-tips-2016-05-10
+Slug: 2016-05-09-redshift-query-tips
 Author: yumebayashi
-Summary: Query often used in RedShift
 
 
 

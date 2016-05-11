@@ -40,3 +40,6 @@ THEME = './pelican-octopress-theme-master'
 
 SEARCH_BOX = True
 MENUITEMS = (('Profile(Linkedin)','https://jp.linkedin.com/in/yasutaka-umebayashi-b9a8034b'),)
+
+PLUGIN_PATHS = ['./pelican-plugins']
+PLUGINS = ['render_math']

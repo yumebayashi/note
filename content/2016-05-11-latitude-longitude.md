@@ -45,7 +45,7 @@ $$ \frac{2\pi R}{360} abs(lat1 - lat2)  $$
 
 Calculating the distance of longitude direction is a bit complicated.  
 Radius varies by its latitude.  
-<img src="/images/explain.png" width="300px">  
+<img src="/note/images/explain.png" width="300px">  
 I fix the radius by the middle point of two latitudes.
 
 $$ \frac{2\pi}{360} Rcos(\frac{\frac{(lat1 + lat2)}{2}\pi}{180}) abs(lng1 -lng2) $$

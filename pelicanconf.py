@@ -43,4 +43,4 @@ MENUITEMS = (('Profile(Linkedin)','https://jp.linkedin.com/in/yasutaka-umebayash
 
 PLUGIN_PATHS = ['./pelican-plugins']
 PLUGINS = ['render_math']
-STATIC_PATHS = ['images']
+# STATIC_PATHS = ['images']

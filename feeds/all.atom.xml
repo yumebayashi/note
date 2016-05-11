@@ -42,7 +42,7 @@ R : 6,371km = 6371000m  &lt;/p&gt;
 &lt;div class="math"&gt;$$ \frac{2\pi R}{360} abs(lat1 - lat2)  $$&lt;/div&gt;
 &lt;p&gt;Calculating the distance of longitude direction is a bit complicated.&lt;br /&gt;
 Radius varies by its latitude.&lt;br /&gt;
-&lt;img src="/images/explain.png" width="300px"&gt;&lt;br /&gt;
+&lt;img src="/note/images/explain.png" width="300px"&gt;&lt;br /&gt;
 I fix the radius by the middle point of two latitudes.&lt;/p&gt;
 &lt;div class="math"&gt;$$ \frac{2\pi}{360} Rcos(\frac{\frac{(lat1 + lat2)}{2}\pi}{180}) abs(lng1 -lng2) $$&lt;/div&gt;
 &lt;p&gt;then apply Pythagorean theorem

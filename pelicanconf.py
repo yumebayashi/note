@@ -19,6 +19,8 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+#GoogleAnalytics
+GOOGLE_ANALYTICS = 'UA-56655645-8'
 
 # Blogroll
 #LINKS = (('Pelican', 'http://getpelican.com/'),

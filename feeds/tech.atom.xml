@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/tech.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-05-11T00:00:00+09:00</updated><entry><title>Calculate approximate distance between two latitude/longitude points by simple query</title><link href="http://yumebayashi.github.io/note/2016-05-11-latitude-longitude.html" rel="alternate"></link><published>2016-05-11T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-11:note/2016-05-11-latitude-longitude.html</id><summary type="html">&lt;ul&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/tech.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-05-13T00:00:00+09:00</updated><entry><title>splitting words into letters in Java</title><link href="http://yumebayashi.github.io/note/2015-05-13-java-split.html" rel="alternate"></link><published>2016-05-13T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-13:note/2015-05-13-java-split.html</id><summary type="html">&lt;ul&gt;
+&lt;li&gt;-java7&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;quot;hoge&amp;quot;.split(&amp;quot;&amp;quot;);
+// [&amp;quot;&amp;quot;, &amp;quot;h&amp;quot;, &amp;quot;o&amp;quot;, &amp;quot;g&amp;quot;, &amp;quot;e&amp;quot;]
+&amp;quot;hoge&amp;quot;.split(&amp;quot;(?&amp;lt;=.)&amp;quot;);
+// [&amp;quot;h&amp;quot;, &amp;quot;o&amp;quot;, &amp;quot;g&amp;quot;, &amp;quot;e&amp;quot;]
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;java8-&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;quot;hoge&amp;quot;.split(&amp;quot;&amp;quot;);
+// [&amp;quot;h&amp;quot;, &amp;quot;o&amp;quot;, &amp;quot;g&amp;quot;, &amp;quot;e&amp;quot;]
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="java"></category></entry><entry><title>Calculate approximate distance between two latitude/longitude points by simple query</title><link href="http://yumebayashi.github.io/note/2016-05-11-latitude-longitude.html" rel="alternate"></link><published>2016-05-11T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-11:note/2016-05-11-latitude-longitude.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;make initial data set&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;CREATE TABLE tmp_test (

@@ -4,8 +4,10 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tags &mdash; yumebayashi's note</title>
+  <title>splitting words into letters in Java &mdash; yumebayashi's note</title>
   <meta name="author" content="yumebayashi">
+
+
 
 
 
@@ -43,25 +45,52 @@
 
 <ul class="main-navigation">
     <li><a href="https://jp.linkedin.com/in/yasutaka-umebayashi-b9a8034b">Profile(Linkedin)</a></li>
-      <li >
+      <li class="active">
         <a href="http://yumebayashi.github.io/note/category/tech.html">Tech</a>
       </li>
 </ul></nav>
   <div id="main">
     <div id="content">
 <div>
-	<article role="article">
-    	<header>
-    		<h1 class="entry-title">Blog Tags</h1>
-    	</header>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">splitting words into letters in Java</h1>
+    <p class="meta">
+<time datetime="2016-05-13T00:00:00+09:00" pubdate>金 13 5月 2016</time>    </p>
+</header>
 
-	<p>
-		<a href="http://yumebayashi.github.io/note/tag/java.html">java</a> (1)<br>
-		<a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a> (1)<br>
-		<a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a> (2)<br>
-		<a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a> (2)<br>
-	</p>
-	</article>
+  <div class="entry-content"><ul>
+<li>-java7</li>
+</ul>
+<div class="highlight"><pre><span></span>&quot;hoge&quot;.split(&quot;&quot;);
+// [&quot;&quot;, &quot;h&quot;, &quot;o&quot;, &quot;g&quot;, &quot;e&quot;]
+&quot;hoge&quot;.split(&quot;(?&lt;=.)&quot;);
+// [&quot;h&quot;, &quot;o&quot;, &quot;g&quot;, &quot;e&quot;]
+</pre></div>
+
+
+<ul>
+<li>java8-</li>
+</ul>
+<div class="highlight"><pre><span></span>&quot;hoge&quot;.split(&quot;&quot;);
+// [&quot;h&quot;, &quot;o&quot;, &quot;g&quot;, &quot;e&quot;]
+</pre></div></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        yumebayashi
+    </span>
+  </span>
+<time datetime="2016-05-13T00:00:00+09:00" pubdate>金 13 5月 2016</time>  <span class="categories">
+    <a class='category' href='http://yumebayashi.github.io/note/category/tech.html'>tech</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="http://yumebayashi.github.io/note/tag/java.html">java</a>  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
 </div>
 <aside class="sidebar">
   <section>

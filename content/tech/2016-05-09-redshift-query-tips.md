@@ -1,9 +1,6 @@
 Title:RedShift Query Tips
 Date: 2016-05-09
-Category: tech
 Tags: redshift
-Slug: 2016-05-09-redshift-query-tips
-Author: yumebayashi
 
 
 

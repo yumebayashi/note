@@ -1,9 +1,6 @@
 Title:Query Cheet Sheet in RedShift(Postgres)
 Date: 2016-05-10
-Category: tech
 Tags: sql,postgres,redshift
-Slug: 2016-05-10-query-cheet-sheet
-Author: yumebayashi
 
 
 ```

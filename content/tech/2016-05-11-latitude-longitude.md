@@ -1,9 +1,6 @@
 Title:Calculate approximate distance between two latitude/longitude points by simple query
 Date: 2016-05-11
-Category: tech
 Tags: sql
-Slug: 2016-05-11-latitude-longitude
-Author: yumebayashi
 
 
 

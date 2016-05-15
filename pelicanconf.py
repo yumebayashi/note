@@ -22,6 +22,9 @@ AUTHOR_FEED_RSS = None
 #GoogleAnalytics
 GOOGLE_ANALYTICS = 'UA-56655645-8'
 
+#Disqus
+SQUS_SITENAME = 'yumebayashisnote'
+
 # Blogroll
 #LINKS = (('Pelican', 'http://getpelican.com/'),
 #         ('Python.org', 'http://python.org/'),
@@ -41,7 +44,6 @@ DEFAULT_PAGINATION = 10
 THEME = './pelican-octopress-theme-master'
 
 SEARCH_BOX = True
-MENUITEMS = (('Profile(Linkedin)','https://jp.linkedin.com/in/yasutaka-umebayashi-b9a8034b'),)
 
 PLUGIN_PATHS = ['./pelican-plugins']
 PLUGINS = ['render_math']

@@ -23,7 +23,7 @@ AUTHOR_FEED_RSS = None
 GOOGLE_ANALYTICS = 'UA-56655645-8'
 
 #Disqus
-SQUS_SITENAME = 'yumebayashisnote'
+DISQUS_SITENAME = 'yumebayashisnote'
 
 # Blogroll
 #LINKS = (('Pelican', 'http://getpelican.com/'),

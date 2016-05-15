@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/tech.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-05-13T00:00:00+09:00</updated><entry><title>splitting words into letters in Java</title><link href="http://yumebayashi.github.io/note/2015-05-13-java-split.html" rel="alternate"></link><published>2016-05-13T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-13:note/2015-05-13-java-split.html</id><summary type="html">&lt;ul&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/tech.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-05-13T00:00:00+09:00</updated><entry><title>splitting words into letters in Java</title><link href="http://yumebayashi.github.io/note/splitting-words-into-letters-in-java.html" rel="alternate"></link><published>2016-05-13T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-13:note/splitting-words-into-letters-in-java.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;-java7&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;quot;hoge&amp;quot;.split(&amp;quot;&amp;quot;);
@@ -14,7 +14,7 @@
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;quot;hoge&amp;quot;.split(&amp;quot;&amp;quot;);
 // [&amp;quot;h&amp;quot;, &amp;quot;o&amp;quot;, &amp;quot;g&amp;quot;, &amp;quot;e&amp;quot;]
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="java"></category></entry><entry><title>Calculate approximate distance between two latitude/longitude points by simple query</title><link href="http://yumebayashi.github.io/note/2016-05-11-latitude-longitude.html" rel="alternate"></link><published>2016-05-11T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-11:note/2016-05-11-latitude-longitude.html</id><summary type="html">&lt;ul&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="java"></category></entry><entry><title>Calculate approximate distance between two latitude/longitude points by simple query</title><link href="http://yumebayashi.github.io/note/calculate-approximate-distance-between-two-latitudelongitude-points-by-simple-query.html" rel="alternate"></link><published>2016-05-11T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-11:note/calculate-approximate-distance-between-two-latitudelongitude-points-by-simple-query.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;make initial data set&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;CREATE TABLE tmp_test (
@@ -133,7 +133,7 @@ I fix the radius by the middle point of two latitudes.&lt;/p&gt;
         "}";
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
-&lt;/script&gt;</summary><category term="sql"></category></entry><entry><title>Query Cheet Sheet in RedShift(Postgres)</title><link href="http://yumebayashi.github.io/note/2016-05-10-query-cheet-sheet.html" rel="alternate"></link><published>2016-05-10T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-10:note/2016-05-10-query-cheet-sheet.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;CREATE TABLE tmp_test (
+&lt;/script&gt;</summary><category term="sql"></category></entry><entry><title>Query Cheet Sheet in RedShift(Postgres)</title><link href="http://yumebayashi.github.io/note/query-cheet-sheet-in-redshiftpostgres.html" rel="alternate"></link><published>2016-05-10T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-10:note/query-cheet-sheet-in-redshiftpostgres.html</id><summary type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;CREATE TABLE tmp_test (
    name character varying(255),
    value1 numeric(8,5),
    value2 numeric(8,5),
@@ -376,7 +376,7 @@ SELECT extract(epoch FROM next - created_at) / 60  AS stay_min FROM t;
  d    | 60.94562 | 388.22237 | 2016-05-09 03:20:56 | 2016-05-09 04:46:49 |  85.8833333333333
  d    | 67.12917 | 952.42817 | 2016-05-09 04:46:49 | 2016-05-09 05:00:30 |  13.6833333333333
  d    | 24.18907 | 299.34541 | 2016-05-09 05:00:30 |                     |
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="sql"></category><category term="postgres"></category><category term="redshift"></category></entry><entry><title>RedShift Query Tips</title><link href="http://yumebayashi.github.io/note/2016-05-09-redshift-query-tips.html" rel="alternate"></link><published>2016-05-09T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-09:note/2016-05-09-redshift-query-tips.html</id><summary type="html">&lt;ul&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="sql"></category><category term="postgres"></category><category term="redshift"></category></entry><entry><title>RedShift Query Tips</title><link href="http://yumebayashi.github.io/note/redshift-query-tips.html" rel="alternate"></link><published>2016-05-09T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-09:note/redshift-query-tips.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;Confirm table definition&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;select * from pg_table_def where tablename = &amp;#39;target_table&amp;#39;;

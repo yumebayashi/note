@@ -8,3 +8,6 @@
 4. `make publish`
 5. `ghp-import output`
 6. `git push origin gh-pages:gh-pages`
+  
+deploy shell
+`sh deploy.sh`

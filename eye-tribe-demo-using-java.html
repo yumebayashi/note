@@ -62,9 +62,27 @@
   <div class="entry-content"><p>EyeTribe is the world's first affordable eye tracker.<br />
 It enables us to get the eye movement trajectories and develop some tools with it.<br />
 Today I'll show you a demo play.<br />
-<a href="https://github.com/yumebayashi/eyetribe-experiment">Github</a></p>
+<a href="https://github.com/yumebayashi/eyetribe-experiment">Github Fork Me</a></p>
 <p><img src="/note/images/system.png" width="100%"></p>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/F-JJikCd6Nc" frameborder="0" allowfullscreen></iframe></div>
+<p>The eyetribe sercer gives 30 fps data by default setting.<br />
+The upper limit is 60 fps. I use default value.<br />
+Every data can not return the coordinates of the point precisely.<br />
+Moreover small eye movement in a moment can be a noise.<br />
+I use Simple Moving Median to get current position for each 0.1 sec.  </p>
+<div class="highlight"><pre><span></span>private Point2D getMedian() {
+    Arrays.sort(xs);
+    Arrays.sort(ys);
+
+    float x = (xs[14] + xs[15]) / 2;
+    float y = (ys[14] + ys[15]) / 2;
+
+    return new Point2D(x, y);
+}
+</pre></div>
+
+
+<p>In my display (1440x900), I think 9 blocks is the upper limit of detecting the eye position.  </p>
+<iframe src="https://www.youtube.com/embed/F-JJikCd6Nc" frameborder="0" allowfullscreen></iframe></div>
         <footer>
 <p class="meta">
   <span class="byline author vcard">
@@ -126,7 +144,7 @@ Today I'll show you a demo play.<br />
 
   <section>
   <h1>Tags</h1>
-    <a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a>,    <a href="http://yumebayashi.github.io/note/tag/java.html">java</a>,    <a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a>,    <a href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a>,    <a href="http://yumebayashi.github.io/note/tag/eyetribe.html">eyetribe</a>  </section>
+    <a href="http://yumebayashi.github.io/note/tag/eyetribe.html">eyetribe</a>,    <a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a>,    <a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a>,    <a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a>,    <a href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a href="http://yumebayashi.github.io/note/tag/java.html">java</a>  </section>
 
 
 

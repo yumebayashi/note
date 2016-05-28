@@ -2,9 +2,27 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/all.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-05-28T00:00:00+09:00</updated><entry><title>eye tribe demo using java</title><link href="http://yumebayashi.github.io/note/eye-tribe-demo-using-java.html" rel="alternate"></link><published>2016-05-28T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-28:note/eye-tribe-demo-using-java.html</id><summary type="html">&lt;p&gt;EyeTribe is the world's first affordable eye tracker.&lt;br /&gt;
 It enables us to get the eye movement trajectories and develop some tools with it.&lt;br /&gt;
 Today I'll show you a demo play.&lt;br /&gt;
-&lt;a href="https://github.com/yumebayashi/eyetribe-experiment"&gt;Github&lt;/a&gt;&lt;/p&gt;
+&lt;a href="https://github.com/yumebayashi/eyetribe-experiment"&gt;Github Fork Me&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="/note/images/system.png" width="100%"&gt;&lt;/p&gt;
-&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/F-JJikCd6Nc" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</summary><category term="java"></category><category term="eyetribe"></category><category term="gadget"></category></entry><entry><title>splitting words into letters in Java</title><link href="http://yumebayashi.github.io/note/splitting-words-into-letters-in-java.html" rel="alternate"></link><published>2016-05-13T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-13:note/splitting-words-into-letters-in-java.html</id><summary type="html">&lt;ul&gt;
+&lt;p&gt;The eyetribe sercer gives 30 fps data by default setting.&lt;br /&gt;
+The upper limit is 60 fps. I use default value.&lt;br /&gt;
+Every data can not return the coordinates of the point precisely.&lt;br /&gt;
+Moreover small eye movement in a moment can be a noise.&lt;br /&gt;
+I use Simple Moving Median to get current position for each 0.1 sec.  &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;private Point2D getMedian() {
+    Arrays.sort(xs);
+    Arrays.sort(ys);
+
+    float x = (xs[14] + xs[15]) / 2;
+    float y = (ys[14] + ys[15]) / 2;
+
+    return new Point2D(x, y);
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In my display (1440x900), I think 9 blocks is the upper limit of detecting the eye position.  &lt;/p&gt;
+&lt;iframe src="https://www.youtube.com/embed/F-JJikCd6Nc" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</summary><category term="java"></category><category term="eyetribe"></category><category term="gadget"></category></entry><entry><title>splitting words into letters in Java</title><link href="http://yumebayashi.github.io/note/splitting-words-into-letters-in-java.html" rel="alternate"></link><published>2016-05-13T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-13:note/splitting-words-into-letters-in-java.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;-java7&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;quot;hoge&amp;quot;.split(&amp;quot;&amp;quot;);

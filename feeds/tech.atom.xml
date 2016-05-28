@@ -3,7 +3,7 @@
 It enables us to get the eye movement trajectories and develop some tools with it.&lt;br /&gt;
 Today I'll show you a demo play.&lt;br /&gt;
 &lt;a href="https://github.com/yumebayashi/eyetribe-experiment"&gt;Github&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src="/note/images/system.png" width="300px"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/note/images/system.png" width="100%"&gt;&lt;/p&gt;
 &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/F-JJikCd6Nc" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</summary><category term="java"></category><category term="eyetribe"></category></entry><entry><title>splitting words into letters in Java</title><link href="http://yumebayashi.github.io/note/splitting-words-into-letters-in-java.html" rel="alternate"></link><published>2016-05-13T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-13:note/splitting-words-into-letters-in-java.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;-java7&lt;/li&gt;
 &lt;/ul&gt;

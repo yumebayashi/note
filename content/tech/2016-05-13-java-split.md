@@ -1,4 +1,4 @@
-Title: splitting words into letters in Java
+Title: Splitting words into letters in Java
 Date: 2016-05-13
 Tags: java
 

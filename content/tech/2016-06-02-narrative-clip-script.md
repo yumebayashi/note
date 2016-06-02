@@ -8,7 +8,7 @@ Tags: narrativeclip,gadget,script,python
 * ffmpeg  
 
 ### Download
-[download](/note/downloads/narrativeclip.py)
+<a href="/note/downloads/narrativeclip.py">Download File</a>
 
 ```
 import glob

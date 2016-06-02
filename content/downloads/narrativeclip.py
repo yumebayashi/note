@@ -1,16 +1,3 @@
-Title: Narrative Clip Script to make mp4 from images
-Date: 2016-06-02
-Tags: narrativeclip,gadget,script,python
-
-
-### Requirement
-* python
-* ffmpeg  
-
-### Download
-[download](/note/downloads/narrativeclip.py)
-
-```
 import glob
 import PIL.Image as Image
 import sys
@@ -67,8 +54,5 @@ for i, file in enumerate(files):
 
 os.system('ffmpeg -f image2 -r 2 -i {0}/source%05d.jpg -r 2 -an -vcodec libx264 -pix_fmt yuv420p {0}/video.mp4'.format(param[1]))
 os.system('rm {0}/source*.jpg'.format(param[1]))
-```
 
-put this script on `clip_?????` dir  
-and execute this script like `python narrativeclip.py yyyy/MM/dd`  
-then video.mp4 will be made in `clip_?????/yyyy/MM/dd/video.mp4`  
+

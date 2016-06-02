@@ -3,6 +3,10 @@ Date: 2016-06-02
 Tags: narrativeclip,gadget,script,python
 
 
+### requirement
+python
+ffmpeg
+
 ```
 import glob
 import PIL.Image as Image
@@ -59,7 +63,7 @@ for i, file in enumerate(files):
     if counter < 5000: s.save('{0}/source{1:05d}.jpg'.format(param[1], i), "JPEG")
 
 os.system('ffmpeg -f image2 -r 2 -i {0}/source%05d.jpg -r 2 -an -vcodec libx264 -pix_fmt yuv420p {0}/video.mp4'.format(param[1]))
-os.system('rm {0}/source%05d.jpg'.format(param[1]))
+os.system('rm {0}/source*.jpg'.format(param[1]))
 ```
 
 put this script on `clip_?????` dir

@@ -66,6 +66,6 @@ os.system('ffmpeg -f image2 -r 2 -i {0}/source%05d.jpg -r 2 -an -vcodec libx264 
 os.system('rm {0}/source*.jpg'.format(param[1]))
 ```
 
-put this script on `clip_?????` dir
+put this script on `clip_?????` dir  
 and execute this script like `python script.py yyyy/MM/dd`  
-then video.mp4 will be made in `clip_?????/yyyy/MM/dd/video.mp4`
+then video.mp4 will be made in `clip_?????/yyyy/MM/dd/video.mp4`  

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/all.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-06-02T00:00:00+09:00</updated><entry><title>Narrative Clip Script to make mp4 from images</title><link href="http://yumebayashi.github.io/note/narrative-clip-script-to-make-mp4-from-images.html" rel="alternate"></link><published>2016-06-02T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-06-02:note/narrative-clip-script-to-make-mp4-from-images.html</id><summary type="html">&lt;h3&gt;requirement&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/all.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-06-02T00:00:00+09:00</updated><entry><title>Narrative Clip Script to make mp4 from images</title><link href="http://yumebayashi.github.io/note/narrative-clip-script-to-make-mp4-from-images.html" rel="alternate"></link><published>2016-06-02T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-06-02:note/narrative-clip-script-to-make-mp4-from-images.html</id><summary type="html">&lt;h3&gt;Requirement&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;python&lt;/li&gt;
 &lt;li&gt;ffmpeg  &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3&gt;Download&lt;/h3&gt;
+&lt;p&gt;&lt;a href="/note/downloads/narrativeclip.py"&gt;download&lt;/a&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;glob&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;PIL.Image&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;Image&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
@@ -64,7 +66,7 @@
 
 
 &lt;p&gt;put this script on &lt;code&gt;clip_?????&lt;/code&gt; dir&lt;br /&gt;
-and execute this script like &lt;code&gt;python script.py yyyy/MM/dd&lt;/code&gt;&lt;br /&gt;
+and execute this script like &lt;code&gt;python narrativeclip.py yyyy/MM/dd&lt;/code&gt;&lt;br /&gt;
 then video.mp4 will be made in &lt;code&gt;clip_?????/yyyy/MM/dd/video.mp4&lt;/code&gt;  &lt;/p&gt;</summary><category term="narrativeclip"></category><category term="gadget"></category><category term="script"></category><category term="python"></category></entry><entry><title>EyeTribe demo using java</title><link href="http://yumebayashi.github.io/note/eyetribe-demo-using-java.html" rel="alternate"></link><published>2016-05-28T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-28:note/eyetribe-demo-using-java.html</id><summary type="html">&lt;p&gt;EyeTribe is the world's first affordable eye tracker.&lt;br /&gt;
 It enables us to get the eye movement trajectories and develop some tools with it.&lt;br /&gt;
 Today I'll show you a demo play.&lt;br /&gt;

@@ -5,7 +5,7 @@
 &lt;li&gt;ffmpeg  &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Download&lt;/h3&gt;
-&lt;p&gt;&lt;a href="/note/scripts/narrativeclip.py"&gt;Download File&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="/note/downloads/narrativeclip.py"&gt;Download File&lt;/a&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;glob&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;PIL.Image&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;Image&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;

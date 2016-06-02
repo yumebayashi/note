@@ -63,9 +63,9 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;put this script on &lt;code&gt;clip_?????&lt;/code&gt; dir
+&lt;p&gt;put this script on &lt;code&gt;clip_?????&lt;/code&gt; dir&lt;br /&gt;
 and execute this script like &lt;code&gt;python script.py yyyy/MM/dd&lt;/code&gt;&lt;br /&gt;
-then video.mp4 will be made in &lt;code&gt;clip_?????/yyyy/MM/dd/video.mp4&lt;/code&gt;&lt;/p&gt;</summary><category term="narrativeclip"></category><category term="gadget"></category><category term="script"></category><category term="python"></category></entry><entry><title>EyeTribe demo using java</title><link href="http://yumebayashi.github.io/note/eyetribe-demo-using-java.html" rel="alternate"></link><published>2016-05-28T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-28:note/eyetribe-demo-using-java.html</id><summary type="html">&lt;p&gt;EyeTribe is the world's first affordable eye tracker.&lt;br /&gt;
+then video.mp4 will be made in &lt;code&gt;clip_?????/yyyy/MM/dd/video.mp4&lt;/code&gt;  &lt;/p&gt;</summary><category term="narrativeclip"></category><category term="gadget"></category><category term="script"></category><category term="python"></category></entry><entry><title>EyeTribe demo using java</title><link href="http://yumebayashi.github.io/note/eyetribe-demo-using-java.html" rel="alternate"></link><published>2016-05-28T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-28:note/eyetribe-demo-using-java.html</id><summary type="html">&lt;p&gt;EyeTribe is the world's first affordable eye tracker.&lt;br /&gt;
 It enables us to get the eye movement trajectories and develop some tools with it.&lt;br /&gt;
 Today I'll show you a demo play.&lt;br /&gt;
 &lt;a href="https://github.com/yumebayashi/eyetribe-experiment"&gt;Github Fork Me&lt;/a&gt;&lt;/p&gt;

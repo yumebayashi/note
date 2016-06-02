@@ -4,9 +4,9 @@ Tags: narrativeclip,gadget,script,python
 
 
 ### requirement
-python
-ffmpeg
-
+* python
+* ffmpeg  
+  
 ```
 import glob
 import PIL.Image as Image

@@ -125,94 +125,97 @@ video.mp4 is output video file, and source images are components of its movie.</
 </pre></div>
 
 
-<p>```narrativeclip.py
-import glob
-import PIL.Image as Image
-import sys
-import os
-import re
-import cv2</p>
-<p>param = sys.argv</p>
-<p>try:
-    pattern = r"\d{4}/\d{2}/\d{2}"
-    flag = re.match(pattern, param[1])
-    if len(param) &lt; 3 or not flag or not int(param[2]):
-        raise Exception</p>
-<p>except:
-    print("arg is {yyyy/MM/dd} {fps}")
-    sys.exit(1)</p>
-<h1>rotate images by its exif, and crop them to square</h1>
-<p>files = glob.glob('{0}/[0-9]*.jpg'.format(param[1]))
-convert_image = {
-    1: lambda img: img,
-    2: lambda img: img.transpose(Image.FLIP_LEFT_RIGHT),
-    3: lambda img: img.transpose(Image.ROTATE_180),
-    4: lambda img: img.transpose(Image.FLIP_TOP_BOTTOM),
-    5: lambda img: img.transpose(Image.FLIP_LEFT_RIGHT).transpose(Image.ROTATE_90),
-    6: lambda img: img.transpose(Image.ROTATE_270),
-    7: lambda img: img.transpose(Image.FLIP_LEFT_RIGHT).transpose(Image.ROTATE_270),
-    8: lambda img: img.transpose(Image.ROTATE_90),
-}</p>
-<p>for i, file in enumerate(files):
-    try:
-        print(file)
-        img = Image.open(file)
-        exif = img._getexif()
-        if exif is not None:
-            orientation = exif.get(0x112, 1)
-            img = convert_image<a href="img">orientation</a></p>
-<div class="highlight"><pre><span></span>    w = img.size[0]
-    h = img.size[1]
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">PIL.Image</span> <span class="kn">as</span> <span class="nn">Image</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
 
-    if w &gt; h:
-        l = h
-        diff = (w - h) / 2
-        s = img.crop((diff, 0, w - diff, h))
-    else:
-        l = w
-        diff = (h - w) / 2
-        s = img.crop((0, diff, w, h - diff))
-    counter = 0
-    pix = s.resize((50, 50)).load()
-    for j in range(50):
-        for k in range(50):
-            if pix[j, k][0] &lt; 40 and pix[j, k][1] &lt; 40 and pix[j, k][2] &lt; 40: counter += 1
-    # remove black images
-    if counter &lt; 2000: s.save(&#39;{0}/source{1:05d}.jpg&#39;.format(param[1], i), &quot;JPEG&quot;)
-except Exception as e:
-    print(&quot;can not open &quot; + file)
-    print(str(type(e)))
-</pre></div>
+<span class="n">param</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span>
 
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="s2">r&quot;\d{4}/\d{2}/\d{2}&quot;</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">param</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">flag</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">int</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">Exception</span>
 
-<h1>tessellate each images if it has face</h1>
-<p>face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-files = glob.glob('{0}/source*.jpg'.format(param[1]))</p>
-<p>for file in files:
-    print(file + " mosaic")
-    img = cv2.imread(file)
-    result = cv2.imread(file)</p>
-<div class="highlight"><pre><span></span><span class="s s-Atom">gray</span> <span class="o">=</span> <span class="s s-Atom">cv2</span><span class="p">.</span><span class="nf">cvtColor</span><span class="p">(</span><span class="s s-Atom">img</span><span class="p">,</span> <span class="s s-Atom">cv2</span><span class="p">.</span><span class="nv">COLOR_RGB2GRAY</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;arg is {yyyy/MM/dd} {fps}&quot;</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="s s-Atom">face</span> <span class="o">=</span> <span class="s s-Atom">face_cascade</span><span class="p">.</span><span class="nf">detectMultiScale</span><span class="p">(</span><span class="s s-Atom">gray</span><span class="p">,</span> <span class="s s-Atom">scaleFactor</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="s s-Atom">minNeighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="s s-Atom">minSize=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+<span class="c1"># rotate images by its exif, and crop them to square</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;{0}/[0-9]*.jpg&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">convert_image</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">img</span><span class="p">:</span> <span class="n">img</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">img</span><span class="p">:</span> <span class="n">img</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">FLIP_LEFT_RIGHT</span><span class="p">),</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">img</span><span class="p">:</span> <span class="n">img</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">ROTATE_180</span><span class="p">),</span>
+    <span class="mi">4</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">img</span><span class="p">:</span> <span class="n">img</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">FLIP_TOP_BOTTOM</span><span class="p">),</span>
+    <span class="mi">5</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">img</span><span class="p">:</span> <span class="n">img</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">FLIP_LEFT_RIGHT</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">ROTATE_90</span><span class="p">),</span>
+    <span class="mi">6</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">img</span><span class="p">:</span> <span class="n">img</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">ROTATE_270</span><span class="p">),</span>
+    <span class="mi">7</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">img</span><span class="p">:</span> <span class="n">img</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">FLIP_LEFT_RIGHT</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">ROTATE_270</span><span class="p">),</span>
+    <span class="mi">8</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">img</span><span class="p">:</span> <span class="n">img</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">ROTATE_90</span><span class="p">),</span>
+<span class="p">}</span>
 
-<span class="s s-Atom">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="nf">len</span><span class="p">(</span><span class="s s-Atom">face</span><span class="p">)</span><span class="s s-Atom">:</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="nb">file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">files</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+        <span class="n">exif</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">_getexif</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">exif</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">orientation</span> <span class="o">=</span> <span class="n">exif</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mh">0x112</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">convert_image</span><span class="p">[</span><span class="n">orientation</span><span class="p">](</span><span class="n">img</span><span class="p">)</span>
 
-    <span class="nf">for</span> <span class="p">(</span><span class="s s-Atom">x</span><span class="p">,</span> <span class="s s-Atom">y</span><span class="p">,</span> <span class="s s-Atom">w</span><span class="p">,</span> <span class="s s-Atom">h</span><span class="p">)</span> <span class="s s-Atom">in</span> <span class="nn">face</span><span class="p">:</span>
-        <span class="s s-Atom">cut_img</span> <span class="o">=</span> <span class="s s-Atom">img</span><span class="p">[</span><span class="nn">y</span><span class="p">:</span><span class="s s-Atom">y</span> <span class="o">+</span> <span class="s s-Atom">h</span><span class="p">,</span> <span class="nn">x</span><span class="p">:</span><span class="s s-Atom">x</span> <span class="o">+</span> <span class="s s-Atom">w</span><span class="p">]</span>
-        <span class="s s-Atom">cut_face</span> <span class="o">=</span> <span class="s s-Atom">cut_img</span><span class="p">.</span><span class="s s-Atom">shape</span><span class="p">[</span><span class="s s-Atom">:</span><span class="mi">2</span><span class="p">][</span><span class="s s-Atom">::-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="s s-Atom">#</span> <span class="s s-Atom">the</span> <span class="s s-Atom">size</span> <span class="s s-Atom">of</span> <span class="s s-Atom">tessellation</span>
-        <span class="s s-Atom">cut_img</span> <span class="o">=</span> <span class="s s-Atom">cv2</span><span class="p">.</span><span class="nf">resize</span><span class="p">(</span><span class="s s-Atom">cut_img</span><span class="p">,</span> <span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="s s-Atom">cut_face</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">15</span><span class="p">),</span> <span class="nf">int</span><span class="p">(</span><span class="s s-Atom">cut_face</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">15</span><span class="p">)))</span>
-        <span class="s s-Atom">cut_img</span> <span class="o">=</span> <span class="s s-Atom">cv2</span><span class="p">.</span><span class="nf">resize</span><span class="p">(</span><span class="s s-Atom">cut_img</span><span class="p">,</span> <span class="s s-Atom">cut_face</span><span class="p">,</span> <span class="s s-Atom">interpolation</span><span class="o">=</span><span class="s s-Atom">cv2</span><span class="p">.</span><span class="nv">INTER_NEAREST</span><span class="p">)</span>
-        <span class="s s-Atom">result</span><span class="p">[</span><span class="nn">y</span><span class="p">:</span><span class="s s-Atom">y</span> <span class="o">+</span> <span class="s s-Atom">h</span><span class="p">,</span> <span class="nn">x</span><span class="p">:</span><span class="s s-Atom">x</span> <span class="o">+</span> <span class="s s-Atom">w</span><span class="p">]</span> <span class="o">=</span> <span class="s s-Atom">cut_img</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="s s-Atom">cv2</span><span class="p">.</span><span class="nf">imwrite</span><span class="p">(</span><span class="s s-Atom">file</span><span class="p">,</span> <span class="s s-Atom">result</span><span class="p">)</span>
-<span class="s s-Atom">cv2</span><span class="p">.</span><span class="nf">destroyAllWindows</span><span class="p">()</span>
-</pre></div>
+        <span class="k">if</span> <span class="n">w</span> <span class="o">&gt;</span> <span class="n">h</span><span class="p">:</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">h</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">crop</span><span class="p">((</span><span class="n">diff</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w</span> <span class="o">-</span> <span class="n">diff</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="n">w</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">crop</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">-</span> <span class="n">diff</span><span class="p">))</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">pix</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">pix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">40</span> <span class="ow">and</span> <span class="n">pix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">40</span> <span class="ow">and</span> <span class="n">pix</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">40</span><span class="p">:</span> <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># remove black images</span>
+        <span class="k">if</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;{0}/source{1:05d}.jpg&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">),</span> <span class="s2">&quot;JPEG&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;can not open &quot;</span> <span class="o">+</span> <span class="nb">file</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
 
+<span class="c1"># tessellate each images if it has face</span>
+<span class="n">face_cascade</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CascadeClassifier</span><span class="p">(</span><span class="s1">&#39;haarcascade_frontalface_default.xml&#39;</span><span class="p">)</span>
+<span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;{0}/source*.jpg&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 
-<p>os.system('ffmpeg -f image2 -r {1} -i {0}/source%05d.jpg -r {1} -an -vcodec libx264 -pix_fmt yuv420p {0}/video.mp4'.format(param[1],param[2]))</p>
-<p>```</p></div>
+<span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">file</span> <span class="o">+</span> <span class="s2">&quot; mosaic&quot;</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="nb">file</span><span class="p">)</span>
+
+    <span class="n">gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2GRAY</span><span class="p">)</span>
+
+    <span class="n">face</span> <span class="o">=</span> <span class="n">face_cascade</span><span class="o">.</span><span class="n">detectMultiScale</span><span class="p">(</span><span class="n">gray</span><span class="p">,</span> <span class="n">scaleFactor</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">minNeighbors</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">minSize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">face</span><span class="p">):</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="ow">in</span> <span class="n">face</span><span class="p">:</span>
+            <span class="n">cut_img</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">y</span><span class="p">:</span><span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">]</span>
+            <span class="n">cut_face</span> <span class="o">=</span> <span class="n">cut_img</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># the size of tessellation</span>
+            <span class="n">cut_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">cut_img</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">cut_face</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">15</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">cut_face</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">15</span><span class="p">)))</span>
+            <span class="n">cut_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">cut_img</span><span class="p">,</span> <span class="n">cut_face</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_NEAREST</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">y</span><span class="p">:</span><span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">cut_img</span>
+
+    <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">destroyAllWindows</span><span class="p">()</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;ffmpeg -f image2 -r {1} -i {0}/source</span><span class="si">%05d</span><span class="s1">.jpg -r {1} -an -vcodec libx264 -pix_fmt yuv420p {0}/video.mp4&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">param</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+</pre></div></div>
         <footer>
 <p class="meta">
   <span class="byline author vcard">
@@ -274,7 +277,7 @@ files = glob.glob('{0}/source*.jpg'.format(param[1]))</p>
 
   <section>
   <h1>Tags</h1>
-    <a href="http://yumebayashi.github.io/note/tag/script.html">script</a>,    <a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a>,    <a href="http://yumebayashi.github.io/note/tag/eyetribe.html">eyetribe</a>,    <a href="http://yumebayashi.github.io/note/tag/narrativeclip.html">narrativeclip</a>,    <a href="http://yumebayashi.github.io/note/tag/java.html">java</a>,    <a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a>,    <a href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a href="http://yumebayashi.github.io/note/tag/python.html">python</a>,    <a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a>  </section>
+    <a href="http://yumebayashi.github.io/note/tag/narrativeclip.html">narrativeclip</a>,    <a href="http://yumebayashi.github.io/note/tag/script.html">script</a>,    <a href="http://yumebayashi.github.io/note/tag/eyetribe.html">eyetribe</a>,    <a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a>,    <a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a>,    <a href="http://yumebayashi.github.io/note/tag/java.html">java</a>,    <a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a>,    <a href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a href="http://yumebayashi.github.io/note/tag/python.html">python</a>  </section>
 
 
 

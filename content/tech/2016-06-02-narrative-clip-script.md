@@ -1,13 +1,13 @@
 Title: Narrative Clip Script to make mp4 from images
 Date: 2016-06-02
-Tags: narrativeclip,gadget,script,python
+Tags: narrativeclip,gadget,script,python,opencv
 
 ### What is this script?
 Narrative Clip is a kind of life logging gadget.
 It takes a photo every 30 seconds (default setting).
 If we wear a Narrative Clip 10 hour a day, we get 1200 photos.
 This script make it possible to combine all photos and make mp4 video,
-considering its rotation exif data and the necessity of tessellation.
+considering its rotation exif data and the necessity of being pixelated/blurred.
 
 
 ### Requirement
@@ -136,7 +136,7 @@ for i, file in enumerate(files):
         print("can not open " + file)
         print(str(type(e)))
 
-# tessellate each images if it has face
+# pixelate each images if it has face
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 files = glob.glob('{0}/source*.jpg'.format(param[1]))
 
@@ -154,7 +154,7 @@ for file in files:
         for (x, y, w, h) in face:
             cut_img = img[y:y + h, x:x + w]
             cut_face = cut_img.shape[:2][::-1]
-            # the size of tessellation
+            # the size of being pixelated
             cut_img = cv2.resize(cut_img, (int(cut_face[0] / 15), int(cut_face[0] / 15)))
             cut_img = cv2.resize(cut_img, cut_face, interpolation=cv2.INTER_NEAREST)
             result[y:y + h, x:x + w] = cut_img

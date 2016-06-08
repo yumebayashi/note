@@ -61,7 +61,7 @@ for i, file in enumerate(files):
         print("can not open " + file)
         print(str(type(e)))
 
-# tessellate each images if it has face
+# pixelate each images if it has face
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 files = glob.glob('{0}/source*.jpg'.format(param[1]))
 
@@ -79,7 +79,7 @@ for file in files:
         for (x, y, w, h) in face:
             cut_img = img[y:y + h, x:x + w]
             cut_face = cut_img.shape[:2][::-1]
-            # the size of tessellation
+            # the size of being pixelated
             cut_img = cv2.resize(cut_img, (int(cut_face[0] / 15), int(cut_face[0] / 15)))
             cut_img = cv2.resize(cut_img, cut_face, interpolation=cv2.INTER_NEAREST)
             result[y:y + h, x:x + w] = cut_img

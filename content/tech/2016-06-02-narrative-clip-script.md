@@ -22,8 +22,8 @@ considering its rotation exif data and the necessity of tessellation.
 
 ### Getting Started
 
-`brew install opencv3 --with-python3`
-`brew install ffmpeg`
+`brew install opencv3 --with-python3`  
+`brew install ffmpeg`  
 set python script and face detection model file to below dir.
 
 ```
@@ -45,7 +45,7 @@ set python script and face detection model file to below dir.
 └── narrativeclip.py                      <-- put file here
 ```
 
-execute the script by `python narrativeclip.py {yyyy/MM/dd} {fps}`
+execute the script by `python narrativeclip.py {yyyy/MM/dd} {fps}`  
 video.mp4 is output video file, and source images are components of its movie.
 
 ```

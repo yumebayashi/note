@@ -16,8 +16,8 @@ considering its rotation exif data and the necessity of tessellation.
 * ffmpeg  
 
 ### Download
-<a href="/note/downloads/narrativeclip.py">narrativeclip.py</a>
-<a href="/note/downloads/haarcascade_frontalface_default.xml">haarcascade_frontalface_default.xml</a>
+* <a href="/note/downloads/narrativeclip.py">narrativeclip.py</a>
+* <a href="/note/downloads/haarcascade_frontalface_default.xml">haarcascade_frontalface_default.xml</a>
 
 
 ### Getting Started

@@ -17,8 +17,8 @@ considering its rotation exif data and the necessity of tessellation.&lt;/p&gt;
 &lt;li&gt;&lt;a href="/note/downloads/haarcascade_frontalface_default.xml"&gt;haarcascade_frontalface_default.xml&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Getting Started&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;brew install opencv3 --with-python3&lt;/code&gt;
-&lt;code&gt;brew install ffmpeg&lt;/code&gt;
+&lt;p&gt;&lt;code&gt;brew install opencv3 --with-python3&lt;/code&gt;&lt;br /&gt;
+&lt;code&gt;brew install ffmpeg&lt;/code&gt;&lt;br /&gt;
 set python script and face detection model file to below dir.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;├── 2016
 │   └── 05
@@ -39,7 +39,7 @@ set python script and face detection model file to below dir.&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;execute the script by &lt;code&gt;python narrativeclip.py {yyyy/MM/dd} {fps}&lt;/code&gt;
+&lt;p&gt;execute the script by &lt;code&gt;python narrativeclip.py {yyyy/MM/dd} {fps}&lt;/code&gt;&lt;br /&gt;
 video.mp4 is output video file, and source images are components of its movie.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;├── 2016
 │   └── 05

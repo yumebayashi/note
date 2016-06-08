@@ -64,7 +64,7 @@
 It takes a photo every 30 seconds (default setting).
 If we wear a Narrative Clip 10 hour a day, we get 1200 photos.
 This script make it possible to combine all photos and make mp4 video,
-considering its rotation exif data and the necessity of tessellation.</p>
+considering its rotation exif data and the necessity of being pixelated/blurred.</p>
 <h3>Requirement</h3>
 <ul>
 <li>python3</li>
@@ -188,7 +188,7 @@ video.mp4 is output video file, and source images are components of its movie.</
         <span class="k">print</span><span class="p">(</span><span class="s2">&quot;can not open &quot;</span> <span class="o">+</span> <span class="nb">file</span><span class="p">)</span>
         <span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
 
-<span class="c1"># tessellate each images if it has face</span>
+<span class="c1"># pixelate each images if it has face</span>
 <span class="n">face_cascade</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CascadeClassifier</span><span class="p">(</span><span class="s1">&#39;haarcascade_frontalface_default.xml&#39;</span><span class="p">)</span>
 <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;{0}/source*.jpg&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 
@@ -206,7 +206,7 @@ video.mp4 is output video file, and source images are components of its movie.</
         <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="ow">in</span> <span class="n">face</span><span class="p">:</span>
             <span class="n">cut_img</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">y</span><span class="p">:</span><span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">]</span>
             <span class="n">cut_face</span> <span class="o">=</span> <span class="n">cut_img</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-            <span class="c1"># the size of tessellation</span>
+            <span class="c1"># the size of being pixelated</span>
             <span class="n">cut_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">cut_img</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">cut_face</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">15</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">cut_face</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">15</span><span class="p">)))</span>
             <span class="n">cut_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">cut_img</span><span class="p">,</span> <span class="n">cut_face</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">cv2</span><span class="o">.</span><span class="n">INTER_NEAREST</span><span class="p">)</span>
             <span class="n">result</span><span class="p">[</span><span class="n">y</span><span class="p">:</span><span class="n">y</span> <span class="o">+</span> <span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span> <span class="o">+</span> <span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">cut_img</span>
@@ -227,7 +227,7 @@ video.mp4 is output video file, and source images are components of its movie.</
     <a class='category' href='http://yumebayashi.github.io/note/category/tech.html'>tech</a>
   </span>
   <span class="categories">
-    <a class="category" href="http://yumebayashi.github.io/note/tag/narrativeclip.html">narrativeclip</a>,    <a class="category" href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a class="category" href="http://yumebayashi.github.io/note/tag/script.html">script</a>,    <a class="category" href="http://yumebayashi.github.io/note/tag/python.html">python</a>  </span>
+    <a class="category" href="http://yumebayashi.github.io/note/tag/narrativeclip.html">narrativeclip</a>,    <a class="category" href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a class="category" href="http://yumebayashi.github.io/note/tag/script.html">script</a>,    <a class="category" href="http://yumebayashi.github.io/note/tag/python.html">python</a>,    <a class="category" href="http://yumebayashi.github.io/note/tag/opencv.html">opencv</a>  </span>
 </p> <div class="sharing">
 </div>        </footer>
         <div class="comments">
@@ -277,7 +277,7 @@ video.mp4 is output video file, and source images are components of its movie.</
 
   <section>
   <h1>Tags</h1>
-    <a href="http://yumebayashi.github.io/note/tag/narrativeclip.html">narrativeclip</a>,    <a href="http://yumebayashi.github.io/note/tag/script.html">script</a>,    <a href="http://yumebayashi.github.io/note/tag/eyetribe.html">eyetribe</a>,    <a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a>,    <a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a>,    <a href="http://yumebayashi.github.io/note/tag/java.html">java</a>,    <a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a>,    <a href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a href="http://yumebayashi.github.io/note/tag/python.html">python</a>  </section>
+    <a href="http://yumebayashi.github.io/note/tag/opencv.html">opencv</a>,    <a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a>,    <a href="http://yumebayashi.github.io/note/tag/eyetribe.html">eyetribe</a>,    <a href="http://yumebayashi.github.io/note/tag/java.html">java</a>,    <a href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a>,    <a href="http://yumebayashi.github.io/note/tag/python.html">python</a>,    <a href="http://yumebayashi.github.io/note/tag/script.html">script</a>,    <a href="http://yumebayashi.github.io/note/tag/narrativeclip.html">narrativeclip</a>,    <a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a>  </section>
 
 
 

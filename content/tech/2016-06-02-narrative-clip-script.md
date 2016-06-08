@@ -69,10 +69,10 @@ video.mp4 is output video file, and source images are components of its movie.
 │           ├── source00003.jpg    <-- new file
 │           └── video.mp4          <-- new file
 ├── haarcascade_frontalface_default.xml
-└── narrative.py
+└── narrativeclip.py
 ```
 
-```
+```narrativeclip.py
 import glob
 import PIL.Image as Image
 import sys

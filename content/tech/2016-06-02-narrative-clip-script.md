@@ -72,7 +72,7 @@ video.mp4 is output video file, and source images are components of its movie.
 └── narrativeclip.py
 ```
 
-```narrativeclip.py
+```python
 import glob
 import PIL.Image as Image
 import sys

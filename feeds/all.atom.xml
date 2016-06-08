@@ -61,101 +61,98 @@ video.mp4 is output video file, and source images are components of its movie.&l
 │           ├── source00003.jpg    &amp;lt;-- new file
 │           └── video.mp4          &amp;lt;-- new file
 ├── haarcascade_frontalface_default.xml
-└── narrative.py
+└── narrativeclip.py
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s s-Atom"&gt;import&lt;/span&gt; &lt;span class="s s-Atom"&gt;glob&lt;/span&gt;
-&lt;span class="s s-Atom"&gt;import&lt;/span&gt; &lt;span class="nv"&gt;PIL&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;Image&lt;/span&gt; &lt;span class="s s-Atom"&gt;as&lt;/span&gt; &lt;span class="nv"&gt;Image&lt;/span&gt;
-&lt;span class="s s-Atom"&gt;import&lt;/span&gt; &lt;span class="s s-Atom"&gt;sys&lt;/span&gt;
-&lt;span class="s s-Atom"&gt;import&lt;/span&gt; &lt;span class="s s-Atom"&gt;os&lt;/span&gt;
-&lt;span class="s s-Atom"&gt;import&lt;/span&gt; &lt;span class="s s-Atom"&gt;re&lt;/span&gt;
-&lt;span class="s s-Atom"&gt;import&lt;/span&gt; &lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;
+&lt;p&gt;```narrativeclip.py
+import glob
+import PIL.Image as Image
+import sys
+import os
+import re
+import cv2&lt;/p&gt;
+&lt;p&gt;param = sys.argv&lt;/p&gt;
+&lt;p&gt;try:
+    pattern = r"\d{4}/\d{2}/\d{2}"
+    flag = re.match(pattern, param[1])
+    if len(param) &amp;lt; 3 or not flag or not int(param[2]):
+        raise Exception&lt;/p&gt;
+&lt;p&gt;except:
+    print("arg is {yyyy/MM/dd} {fps}")
+    sys.exit(1)&lt;/p&gt;
+&lt;h1&gt;rotate images by its exif, and crop them to square&lt;/h1&gt;
+&lt;p&gt;files = glob.glob('{0}/[0-9]*.jpg'.format(param[1]))
+convert_image = {
+    1: lambda img: img,
+    2: lambda img: img.transpose(Image.FLIP_LEFT_RIGHT),
+    3: lambda img: img.transpose(Image.ROTATE_180),
+    4: lambda img: img.transpose(Image.FLIP_TOP_BOTTOM),
+    5: lambda img: img.transpose(Image.FLIP_LEFT_RIGHT).transpose(Image.ROTATE_90),
+    6: lambda img: img.transpose(Image.ROTATE_270),
+    7: lambda img: img.transpose(Image.FLIP_LEFT_RIGHT).transpose(Image.ROTATE_270),
+    8: lambda img: img.transpose(Image.ROTATE_90),
+}&lt;/p&gt;
+&lt;p&gt;for i, file in enumerate(files):
+    try:
+        print(file)
+        img = Image.open(file)
+        exif = img._getexif()
+        if exif is not None:
+            orientation = exif.get(0x112, 1)
+            img = convert_image&lt;a href="img"&gt;orientation&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    w = img.size[0]
+    h = img.size[1]
 
-&lt;span class="s s-Atom"&gt;param&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;sys&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="s s-Atom"&gt;argv&lt;/span&gt;
+    if w &amp;gt; h:
+        l = h
+        diff = (w - h) / 2
+        s = img.crop((diff, 0, w - diff, h))
+    else:
+        l = w
+        diff = (h - w) / 2
+        s = img.crop((0, diff, w, h - diff))
+    counter = 0
+    pix = s.resize((50, 50)).load()
+    for j in range(50):
+        for k in range(50):
+            if pix[j, k][0] &amp;lt; 40 and pix[j, k][1] &amp;lt; 40 and pix[j, k][2] &amp;lt; 40: counter += 1
+    # remove black images
+    if counter &amp;lt; 2000: s.save(&amp;#39;{0}/source{1:05d}.jpg&amp;#39;.format(param[1], i), &amp;quot;JPEG&amp;quot;)
+except Exception as e:
+    print(&amp;quot;can not open &amp;quot; + file)
+    print(str(type(e)))
+&lt;/pre&gt;&lt;/div&gt;
 
-&lt;span class="nn"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="s s-Atom"&gt;pattern&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;r&lt;/span&gt;&lt;span class="err"&gt;&amp;quot;&lt;/span&gt;&lt;span class="s s-Atom"&gt;\d&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s s-Atom"&gt;/\d&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s s-Atom"&gt;/\d&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
-&lt;span class="s2"&gt;    flag = re.match(pattern, param[1])&lt;/span&gt;
-&lt;span class="s2"&gt;    if len(param) &amp;lt; 3 or not flag or not int(param[2]):&lt;/span&gt;
-&lt;span class="s2"&gt;        raise Exception&lt;/span&gt;
 
-&lt;span class="s2"&gt;except:&lt;/span&gt;
-&lt;span class="s2"&gt;    print(&amp;quot;&lt;/span&gt;&lt;span class="s s-Atom"&gt;arg&lt;/span&gt; &lt;span class="o"&gt;is&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s s-Atom"&gt;yyyy&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;MM&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="s s-Atom"&gt;dd&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s s-Atom"&gt;fps&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;)&lt;/span&gt;
-&lt;span class="s2"&gt;    sys.exit(1)&lt;/span&gt;
+&lt;h1&gt;tessellate each images if it has face&lt;/h1&gt;
+&lt;p&gt;face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+files = glob.glob('{0}/source*.jpg'.format(param[1]))&lt;/p&gt;
+&lt;p&gt;for file in files:
+    print(file + " mosaic")
+    img = cv2.imread(file)
+    result = cv2.imread(file)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s s-Atom"&gt;gray&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cvtColor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;COLOR_RGB2GRAY&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="s2"&gt;# rotate images by its exif, and crop them to square&lt;/span&gt;
-&lt;span class="s2"&gt;files = glob.glob(&amp;#39;{0}/[0-9]*.jpg&amp;#39;.format(param[1]))&lt;/span&gt;
-&lt;span class="s2"&gt;convert_image = {&lt;/span&gt;
-&lt;span class="s2"&gt;    1: lambda img: img,&lt;/span&gt;
-&lt;span class="s2"&gt;    2: lambda img: img.transpose(Image.FLIP_LEFT_RIGHT),&lt;/span&gt;
-&lt;span class="s2"&gt;    3: lambda img: img.transpose(Image.ROTATE_180),&lt;/span&gt;
-&lt;span class="s2"&gt;    4: lambda img: img.transpose(Image.FLIP_TOP_BOTTOM),&lt;/span&gt;
-&lt;span class="s2"&gt;    5: lambda img: img.transpose(Image.FLIP_LEFT_RIGHT).transpose(Image.ROTATE_90),&lt;/span&gt;
-&lt;span class="s2"&gt;    6: lambda img: img.transpose(Image.ROTATE_270),&lt;/span&gt;
-&lt;span class="s2"&gt;    7: lambda img: img.transpose(Image.FLIP_LEFT_RIGHT).transpose(Image.ROTATE_270),&lt;/span&gt;
-&lt;span class="s2"&gt;    8: lambda img: img.transpose(Image.ROTATE_90),&lt;/span&gt;
-&lt;span class="s2"&gt;}&lt;/span&gt;
+&lt;span class="s s-Atom"&gt;face&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;face_cascade&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;detectMultiScale&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;gray&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;scaleFactor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;minNeighbors&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;minSize=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
-&lt;span class="s2"&gt;for i, file in enumerate(files):&lt;/span&gt;
-&lt;span class="s2"&gt;    try:&lt;/span&gt;
-&lt;span class="s2"&gt;        print(file)&lt;/span&gt;
-&lt;span class="s2"&gt;        img = Image.open(file)&lt;/span&gt;
-&lt;span class="s2"&gt;        exif = img._getexif()&lt;/span&gt;
-&lt;span class="s2"&gt;        if exif is not None:&lt;/span&gt;
-&lt;span class="s2"&gt;            orientation = exif.get(0x112, 1)&lt;/span&gt;
-&lt;span class="s2"&gt;            img = convert_image[orientation](img)&lt;/span&gt;
+&lt;span class="s s-Atom"&gt;if&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nf"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;face&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;
 
-&lt;span class="s2"&gt;        w = img.size[0]&lt;/span&gt;
-&lt;span class="s2"&gt;        h = img.size[1]&lt;/span&gt;
+    &lt;span class="nf"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;h&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s s-Atom"&gt;in&lt;/span&gt; &lt;span class="nn"&gt;face&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;img&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nn"&gt;y&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s s-Atom"&gt;y&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s s-Atom"&gt;h&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s s-Atom"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s s-Atom"&gt;w&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="s s-Atom"&gt;cut_face&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="s s-Atom"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s s-Atom"&gt;::-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="s s-Atom"&gt;#&lt;/span&gt; &lt;span class="s s-Atom"&gt;the&lt;/span&gt; &lt;span class="s s-Atom"&gt;size&lt;/span&gt; &lt;span class="s s-Atom"&gt;of&lt;/span&gt; &lt;span class="s s-Atom"&gt;tessellation&lt;/span&gt;
+        &lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;resize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;cut_face&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="nf"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;cut_face&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+        &lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;resize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;cut_face&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;interpolation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;INTER_NEAREST&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="s s-Atom"&gt;result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nn"&gt;y&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s s-Atom"&gt;y&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s s-Atom"&gt;h&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s s-Atom"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s s-Atom"&gt;w&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt;
 
-&lt;span class="s2"&gt;        if w &amp;gt; h:&lt;/span&gt;
-&lt;span class="s2"&gt;            l = h&lt;/span&gt;
-&lt;span class="s2"&gt;            diff = (w - h) / 2&lt;/span&gt;
-&lt;span class="s2"&gt;            s = img.crop((diff, 0, w - diff, h))&lt;/span&gt;
-&lt;span class="s2"&gt;        else:&lt;/span&gt;
-&lt;span class="s2"&gt;            l = w&lt;/span&gt;
-&lt;span class="s2"&gt;            diff = (h - w) / 2&lt;/span&gt;
-&lt;span class="s2"&gt;            s = img.crop((0, diff, w, h - diff))&lt;/span&gt;
-&lt;span class="s2"&gt;        counter = 0&lt;/span&gt;
-&lt;span class="s2"&gt;        pix = s.resize((50, 50)).load()&lt;/span&gt;
-&lt;span class="s2"&gt;        for j in range(50):&lt;/span&gt;
-&lt;span class="s2"&gt;            for k in range(50):&lt;/span&gt;
-&lt;span class="s2"&gt;                if pix[j, k][0] &amp;lt; 40 and pix[j, k][1] &amp;lt; 40 and pix[j, k][2] &amp;lt; 40: counter += 1&lt;/span&gt;
-&lt;span class="s2"&gt;        # remove black images&lt;/span&gt;
-&lt;span class="s2"&gt;        if counter &amp;lt; 2000: s.save(&amp;#39;{0}/source{1:05d}.jpg&amp;#39;.format(param[1], i), &amp;quot;&lt;/span&gt;&lt;span class="nv"&gt;JPEG&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;)&lt;/span&gt;
-&lt;span class="s2"&gt;    except Exception as e:&lt;/span&gt;
-&lt;span class="s2"&gt;        print(&amp;quot;&lt;/span&gt;&lt;span class="s s-Atom"&gt;can&lt;/span&gt; &lt;span class="o"&gt;not&lt;/span&gt; &lt;span class="s s-Atom"&gt;open&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; + file)&lt;/span&gt;
-&lt;span class="s2"&gt;        print(str(type(e)))&lt;/span&gt;
+&lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;imwrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;destroyAllWindows&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 
-&lt;span class="s2"&gt;# tessellate each images if it has face&lt;/span&gt;
-&lt;span class="s2"&gt;face_cascade = cv2.CascadeClassifier(&amp;#39;haarcascade_frontalface_default.xml&amp;#39;)&lt;/span&gt;
-&lt;span class="s2"&gt;files = glob.glob(&amp;#39;{0}/source*.jpg&amp;#39;.format(param[1]))&lt;/span&gt;
 
-&lt;span class="s2"&gt;for file in files:&lt;/span&gt;
-&lt;span class="s2"&gt;    print(file + &amp;quot;&lt;/span&gt; &lt;span class="s s-Atom"&gt;mosaic&lt;/span&gt;&lt;span class="err"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="s s-Atom"&gt;img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;imread&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="s s-Atom"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;imread&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="s s-Atom"&gt;gray&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;cvtColor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;COLOR_RGB2GRAY&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-    &lt;span class="s s-Atom"&gt;face&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;face_cascade&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;detectMultiScale&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;gray&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;scaleFactor&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mf"&gt;1.2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;minNeighbors&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;minSize=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-
-    &lt;span class="s s-Atom"&gt;if&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="nf"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;face&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;
-
-        &lt;span class="nf"&gt;for&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;y&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;w&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;h&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s s-Atom"&gt;in&lt;/span&gt; &lt;span class="nn"&gt;face&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-            &lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;img&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nn"&gt;y&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s s-Atom"&gt;y&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s s-Atom"&gt;h&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s s-Atom"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s s-Atom"&gt;w&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-            &lt;span class="s s-Atom"&gt;cut_face&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="s s-Atom"&gt;shape&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s s-Atom"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="s s-Atom"&gt;::-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-            &lt;span class="s s-Atom"&gt;#&lt;/span&gt; &lt;span class="s s-Atom"&gt;the&lt;/span&gt; &lt;span class="s s-Atom"&gt;size&lt;/span&gt; &lt;span class="s s-Atom"&gt;of&lt;/span&gt; &lt;span class="s s-Atom"&gt;tessellation&lt;/span&gt;
-            &lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;resize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;cut_face&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="nf"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;cut_face&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-            &lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;resize&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;cut_face&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;interpolation&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nv"&gt;INTER_NEAREST&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-            &lt;span class="s s-Atom"&gt;result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nn"&gt;y&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s s-Atom"&gt;y&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s s-Atom"&gt;h&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nn"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="s s-Atom"&gt;x&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s s-Atom"&gt;w&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s s-Atom"&gt;cut_img&lt;/span&gt;
-
-    &lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;imwrite&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s s-Atom"&gt;result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-    &lt;span class="s s-Atom"&gt;cv2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;destroyAllWindows&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-
-&lt;span class="s s-Atom"&gt;os&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;system&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;&amp;#39;ffmpeg -f image2 -r {1} -i {0}/source%05d.jpg -r {1} -an -vcodec libx264 -pix_fmt yuv420p {0}/video.mp4&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s s-Atom"&gt;param&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="s s-Atom"&gt;param&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="narrativeclip"></category><category term="gadget"></category><category term="script"></category><category term="python"></category></entry><entry><title>EyeTribe demo using java</title><link href="http://yumebayashi.github.io/note/eyetribe-demo-using-java.html" rel="alternate"></link><published>2016-05-28T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-28:note/eyetribe-demo-using-java.html</id><summary type="html">&lt;p&gt;EyeTribe is the world's first affordable eye tracker.&lt;br /&gt;
+&lt;p&gt;os.system('ffmpeg -f image2 -r {1} -i {0}/source%05d.jpg -r {1} -an -vcodec libx264 -pix_fmt yuv420p {0}/video.mp4'.format(param[1],param[2]))&lt;/p&gt;
+&lt;p&gt;```&lt;/p&gt;</summary><category term="narrativeclip"></category><category term="gadget"></category><category term="script"></category><category term="python"></category></entry><entry><title>EyeTribe demo using java</title><link href="http://yumebayashi.github.io/note/eyetribe-demo-using-java.html" rel="alternate"></link><published>2016-05-28T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-05-28:note/eyetribe-demo-using-java.html</id><summary type="html">&lt;p&gt;EyeTribe is the world's first affordable eye tracker.&lt;br /&gt;
 It enables us to get the eye movement trajectories and develop some tools with it.&lt;br /&gt;
 Today I'll show you a demo play.&lt;br /&gt;
 &lt;a href="https://github.com/yumebayashi/eyetribe-experiment"&gt;Github Fork Me&lt;/a&gt;&lt;/p&gt;

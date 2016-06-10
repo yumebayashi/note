@@ -6,7 +6,7 @@ Tags: narrativeclip,gadget,script,python,opencv
 Narrative Clip is a kind of life logging gadget.
 It takes a photo every 30 seconds (default setting).
 If we wear a Narrative Clip 10 hour a day, we get 1200 photos.
-This script make it possible to combine all photos and make mp4 video,
+This script make it possible to crop all photos square and combine them and make mp4 video,
 considering its rotation exif data and the necessity of being pixelated/blurred.
 
 

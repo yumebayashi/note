@@ -25,7 +25,6 @@ Software Engineer, AdTech
 * MyBatis
 * Tableau
 * Gradle
-* Vert.x
 * Git
 * etc
 

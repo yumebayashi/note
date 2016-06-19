@@ -6,6 +6,7 @@ Software Engineer, AdTech
 ### Location Based Ad Network/DMP(Data Management Platform) 2015 -
 * developped batch tasks for reporting.
 * developped user segmentation system.
+* developped adserver.
 * visualized data.
 * worked for sales engineer when needed
 * etc
@@ -21,8 +22,10 @@ Software Engineer, AdTech
 * Mysql
 * Postgres
 * Redis
+* etc
 ### Technologies(Frameworks/Build,etc)  
 * MyBatis
+* Spring
 * Tableau
 * Gradle
 * Git

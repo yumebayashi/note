@@ -1,5 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/tech.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-06-02T00:00:00+09:00</updated><entry><title>Narrative Clip Script to make mp4 from images</title><link href="http://yumebayashi.github.io/note/narrative-clip-script-to-make-mp4-from-images.html" rel="alternate"></link><published>2016-06-02T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-06-02:note/narrative-clip-script-to-make-mp4-from-images.html</id><summary type="html">&lt;h3&gt;What is this script?&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/tech.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-06-19T00:00:00+09:00</updated><entry><title>q command for querying csv file</title><link href="http://yumebayashi.github.io/note/q-command-for-querying-csv-file.html" rel="alternate"></link><published>2016-06-19T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-06-19:note/q-command-for-querying-csv-file.html</id><summary type="html">&lt;h3&gt;environment&lt;/h3&gt;
+&lt;p&gt;requires python 2.X&lt;br /&gt;
+&lt;code&gt;brew install q&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;usage&lt;/h3&gt;
+&lt;p&gt;you can read help by -h option.&lt;br /&gt;
+&lt;code&gt;q -h&lt;/code&gt;  &lt;/p&gt;
+&lt;p&gt;if csv has header, we need append -H.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;q -d , -H &amp;quot;select * from tmp.csv&amp;quot;
+1,aaa,23
+2,bbb,54
+3,ccc,12
+4,ddd,65
+5,eee,33
+6,fff,75
+7,ggg,80
+8,hhh,89
+9,iii,34
+10,kkk,96
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;q -d , -H &amp;quot;select id from tmp.csv order by id desc limit 4&amp;quot;
+10
+9
+8
+7
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;q -d , -H &amp;quot;SELECT *,(CASE WHEN score &amp;gt; 50 THEN 1 ELSE 0 END) from tmp.csv&amp;quot; &amp;gt; tmp2.csv
+1,aaa,23,0
+2,bbb,54,1
+3,ccc,12,0
+4,ddd,65,1
+5,eee,33,0
+6,fff,75,1
+7,ggg,80,1
+8,hhh,89,1
+9,iii,34,0
+10,kkk,96,1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;q -d , &amp;quot;select c4, sum(c3) from tmp2.csv group by c4&amp;quot;
+0,102
+1,459
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="q"></category><category term="query"></category><category term="shell"></category></entry><entry><title>Narrative Clip Script to make mp4 from images</title><link href="http://yumebayashi.github.io/note/narrative-clip-script-to-make-mp4-from-images.html" rel="alternate"></link><published>2016-06-02T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-06-02:note/narrative-clip-script-to-make-mp4-from-images.html</id><summary type="html">&lt;h3&gt;What is this script?&lt;/h3&gt;
 &lt;p&gt;Narrative Clip is a kind of life logging gadget.
 It takes a photo every 30 seconds (default setting).
 If we wear a Narrative Clip 10 hour a day, we get 1200 photos.

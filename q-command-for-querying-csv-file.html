@@ -4,8 +4,10 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Categories &mdash; yumebayashi's note</title>
+  <title>q command for querying csv file &mdash; yumebayashi's note</title>
   <meta name="author" content="yumebayashi">
+
+
 
 
 
@@ -43,22 +45,95 @@
 
 <ul class="main-navigation">
       <li><a href="http://yumebayashi.github.io/note/pages/profile.html">Profile</a></li>
-      <li >
+      <li class="active">
         <a href="http://yumebayashi.github.io/note/category/tech.html">Tech</a>
       </li>
 </ul></nav>
   <div id="main">
     <div id="content">
 <div>
-	<article role="article">
-    	<header>
-    		<h1 class="entry-title">Blog Categories</h1>
-    	</header>
+    <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">q command for querying csv file</h1>
+    <p class="meta">
+<time datetime="2016-06-19T00:00:00+09:00" pubdate>日 19 6月 2016</time>    </p>
+</header>
 
-	<p>
-		<a href="http://yumebayashi.github.io/note/category/tech.html">tech</a> (7)<br>
-	</p>
-	</article>
+  <div class="entry-content"><h3>environment</h3>
+<p>requires python 2.X<br />
+<code>brew install q</code></p>
+<h3>usage</h3>
+<p>you can read help by -h option.<br />
+<code>q -h</code>  </p>
+<p>if csv has header, we need append -H.</p>
+<div class="highlight"><pre><span></span>q -d , -H &quot;select * from tmp.csv&quot;
+1,aaa,23
+2,bbb,54
+3,ccc,12
+4,ddd,65
+5,eee,33
+6,fff,75
+7,ggg,80
+8,hhh,89
+9,iii,34
+10,kkk,96
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>q -d , -H &quot;select id from tmp.csv order by id desc limit 4&quot;
+10
+9
+8
+7
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>q -d , -H &quot;SELECT *,(CASE WHEN score &gt; 50 THEN 1 ELSE 0 END) from tmp.csv&quot; &gt; tmp2.csv
+1,aaa,23,0
+2,bbb,54,1
+3,ccc,12,0
+4,ddd,65,1
+5,eee,33,0
+6,fff,75,1
+7,ggg,80,1
+8,hhh,89,1
+9,iii,34,0
+10,kkk,96,1
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>q -d , &quot;select c4, sum(c3) from tmp2.csv group by c4&quot;
+0,102
+1,459
+</pre></div></div>
+        <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        yumebayashi
+    </span>
+  </span>
+<time datetime="2016-06-19T00:00:00+09:00" pubdate>日 19 6月 2016</time>  <span class="categories">
+    <a class='category' href='http://yumebayashi.github.io/note/category/tech.html'>tech</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="http://yumebayashi.github.io/note/tag/q.html">q</a>,    <a class="category" href="http://yumebayashi.github.io/note/tag/query.html">query</a>,    <a class="category" href="http://yumebayashi.github.io/note/tag/shell.html">shell</a>  </span>
+</p> <div class="sharing">
+</div>        </footer>
+        <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_identifier = "q-command-for-querying-csv-file.html";
+            (function() {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = 'http://yumebayashisnote.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+            </script>
+        </div>
+    </article>
 </div>
 <aside class="sidebar">
   <section>
@@ -125,6 +200,9 @@
 </script>
   <script type="text/javascript">
     var disqus_shortname = 'yumebayashisnote';
+    var disqus_identifier = '/q-command-for-querying-csv-file.html';
+    var disqus_url = 'http://yumebayashi.github.io/note/q-command-for-querying-csv-file.html';
+    var disqus_title = 'q command for querying csv file';
     (function() {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = "//" + disqus_shortname + '.disqus.com/embed.js';

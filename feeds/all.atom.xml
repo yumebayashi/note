@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/all.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-06-19T00:00:00+09:00</updated><entry><title>q command for querying csv file</title><link href="http://yumebayashi.github.io/note/q-command-for-querying-csv-file.html" rel="alternate"></link><published>2016-06-19T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-06-19:note/q-command-for-querying-csv-file.html</id><summary type="html">&lt;h3&gt;environment&lt;/h3&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/all.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-06-19T00:00:00+09:00</updated><entry><title>q command for querying on csv file directly</title><link href="http://yumebayashi.github.io/note/q-command-for-querying-on-csv-file-directly.html" rel="alternate"></link><published>2016-06-19T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-06-19:note/q-command-for-querying-on-csv-file-directly.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/harelba/q"&gt;https://github.com/harelba/q&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;environment&lt;/h3&gt;
 &lt;p&gt;requires python 2.X&lt;br /&gt;
-&lt;code&gt;brew install q&lt;/code&gt;&lt;/p&gt;
+&lt;code&gt;brew install q&lt;/code&gt;  &lt;/p&gt;
 &lt;h3&gt;usage&lt;/h3&gt;
 &lt;p&gt;you can read help by -h option.&lt;br /&gt;
 &lt;code&gt;q -h&lt;/code&gt;  &lt;/p&gt;
@@ -42,12 +43,15 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;p&gt;we choose column like c1,c2 for no-header files  &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;q -d , &amp;quot;select c4, sum(c3) from tmp2.csv group by c4&amp;quot;
 0,102
 1,459
+&lt;/pre&gt;&lt;/div&gt;
 
-below query returns same result. we can pipe the stdout with &amp;quot;-&amp;quot;
-q -d , -H &amp;quot;select *,(case when score &amp;gt; 50 then 1 else 0 end) from tmp.csv&amp;quot; | q -d , &amp;quot;select c4, sum(c3) from -  group by c4 limit 10&amp;quot;
+
+&lt;p&gt;below query returns the same result as above. we can pipe the stdout with "-"&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;q -d , -H &amp;quot;select *,(case when score &amp;gt; 50 then 1 else 0 end) from tmp.csv&amp;quot; | q -d , &amp;quot;select c4, sum(c3) from -  group by c4&amp;quot;
 0,102
 1,459
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="q"></category><category term="query"></category><category term="shell"></category></entry><entry><title>Narrative Clip Script to make mp4 from images</title><link href="http://yumebayashi.github.io/note/narrative-clip-script-to-make-mp4-from-images.html" rel="alternate"></link><published>2016-06-02T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-06-02:note/narrative-clip-script-to-make-mp4-from-images.html</id><summary type="html">&lt;h3&gt;What is this script?&lt;/h3&gt;

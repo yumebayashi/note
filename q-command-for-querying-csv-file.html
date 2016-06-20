@@ -88,7 +88,7 @@
 </pre></div>
 
 
-<div class="highlight"><pre><span></span>q -d , -H &quot;SELECT *,(CASE WHEN score &gt; 50 THEN 1 ELSE 0 END) from tmp.csv&quot; &gt; tmp2.csv
+<div class="highlight"><pre><span></span>q -d , -H &quot;select *,(case when score &gt; 50 then 1 else 0 end) from tmp.csv&quot; &gt; tmp2.csv
 1,aaa,23,0
 2,bbb,54,1
 3,ccc,12,0
@@ -103,6 +103,11 @@
 
 
 <div class="highlight"><pre><span></span>q -d , &quot;select c4, sum(c3) from tmp2.csv group by c4&quot;
+0,102
+1,459
+
+below query returns same result. we can pipe the stdout with &quot;-&quot;
+q -d  , &quot;select *,(case when score &gt; 50 then 1 else 0 end) from tmp.csv&quot; | q -d , &quot;select c4, sum(c3) from -  group by c4 limit 10&quot;
 0,102
 1,459
 </pre></div></div>
@@ -167,7 +172,7 @@
 
   <section>
   <h1>Tags</h1>
-    <a href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a href="http://yumebayashi.github.io/note/tag/script.html">script</a>,    <a href="http://yumebayashi.github.io/note/tag/python.html">python</a>,    <a href="http://yumebayashi.github.io/note/tag/q.html">q</a>,    <a href="http://yumebayashi.github.io/note/tag/java.html">java</a>,    <a href="http://yumebayashi.github.io/note/tag/opencv.html">opencv</a>,    <a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a>,    <a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a>,    <a href="http://yumebayashi.github.io/note/tag/query.html">query</a>,    <a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a>,    <a href="http://yumebayashi.github.io/note/tag/shell.html">shell</a>,    <a href="http://yumebayashi.github.io/note/tag/eyetribe.html">eyetribe</a>,    <a href="http://yumebayashi.github.io/note/tag/narrativeclip.html">narrativeclip</a>  </section>
+    <a href="http://yumebayashi.github.io/note/tag/script.html">script</a>,    <a href="http://yumebayashi.github.io/note/tag/q.html">q</a>,    <a href="http://yumebayashi.github.io/note/tag/shell.html">shell</a>,    <a href="http://yumebayashi.github.io/note/tag/query.html">query</a>,    <a href="http://yumebayashi.github.io/note/tag/java.html">java</a>,    <a href="http://yumebayashi.github.io/note/tag/eyetribe.html">eyetribe</a>,    <a href="http://yumebayashi.github.io/note/tag/python.html">python</a>,    <a href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a href="http://yumebayashi.github.io/note/tag/narrativeclip.html">narrativeclip</a>,    <a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a>,    <a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a>,    <a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a>,    <a href="http://yumebayashi.github.io/note/tag/opencv.html">opencv</a>  </section>
 
 
 

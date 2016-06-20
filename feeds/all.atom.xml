@@ -28,7 +28,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;q -d , -H &amp;quot;SELECT *,(CASE WHEN score &amp;gt; 50 THEN 1 ELSE 0 END) from tmp.csv&amp;quot; &amp;gt; tmp2.csv
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;q -d , -H &amp;quot;select *,(case when score &amp;gt; 50 then 1 else 0 end) from tmp.csv&amp;quot; &amp;gt; tmp2.csv
 1,aaa,23,0
 2,bbb,54,1
 3,ccc,12,0
@@ -43,6 +43,11 @@
 
 
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;q -d , &amp;quot;select c4, sum(c3) from tmp2.csv group by c4&amp;quot;
+0,102
+1,459
+
+below query returns same result. we can pipe the stdout with &amp;quot;-&amp;quot;
+q -d  , &amp;quot;select *,(case when score &amp;gt; 50 then 1 else 0 end) from tmp.csv&amp;quot; | q -d , &amp;quot;select c4, sum(c3) from -  group by c4 limit 10&amp;quot;
 0,102
 1,459
 &lt;/pre&gt;&lt;/div&gt;</summary><category term="q"></category><category term="query"></category><category term="shell"></category></entry><entry><title>Narrative Clip Script to make mp4 from images</title><link href="http://yumebayashi.github.io/note/narrative-clip-script-to-make-mp4-from-images.html" rel="alternate"></link><published>2016-06-02T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-06-02:note/narrative-clip-script-to-make-mp4-from-images.html</id><summary type="html">&lt;h3&gt;What is this script?&lt;/h3&gt;

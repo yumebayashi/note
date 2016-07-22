@@ -68,8 +68,8 @@ considering its rotation exif data and the necessity of being pixelated/blurred.
 &lt;/ul&gt;
 &lt;h3&gt;Download&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="/note/downloads/narrativeclip.py"&gt;narrativeclip.py&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="/note/downloads/haarcascade_frontalface_default.xml"&gt;haarcascade_frontalface_default.xml&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/downloads/narrativeclip.py"&gt;narrativeclip.py&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/downloads/haarcascade_frontalface_default.xml"&gt;haarcascade_frontalface_default.xml&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;Getting Started&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;brew install opencv3 --with-python3&lt;/code&gt;&lt;br /&gt;
@@ -214,7 +214,7 @@ video.mp4 is output video file, and source images are components of its movie.&l
 It enables us to get the eye movement trajectories and develop some tools with it.&lt;br /&gt;
 Today I'll show you a demo play.&lt;br /&gt;
 &lt;a href="https://github.com/yumebayashi/eyetribe-experiment"&gt;Github Fork Me&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src="/note/images/system.png" width="100%"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/system.png" width="100%"&gt;&lt;/p&gt;
 &lt;p&gt;The eyetribe sercer gives 30 fps data by default setting.&lt;br /&gt;
 The upper limit is 60 fps. I use default value.&lt;br /&gt;
 Every data can not return the coordinates of the point precisely.&lt;br /&gt;
@@ -291,7 +291,7 @@ R : 6,371km = 6371000m  &lt;/p&gt;
 &lt;div class="math"&gt;$$ \frac{2\pi R}{360} abs(lat1 - lat2)  $$&lt;/div&gt;
 &lt;p&gt;Calculating the distance of longitude direction is a bit complicated.&lt;br /&gt;
 Radius varies by its latitude.&lt;br /&gt;
-&lt;img src="/note/images/explain.png" width="300px"&gt;&lt;br /&gt;
+&lt;img src="/images/explain.png" width="300px"&gt;&lt;br /&gt;
 I fix the radius by the middle point of two latitudes.&lt;/p&gt;
 &lt;div class="math"&gt;$$ \frac{2\pi}{360} Rcos(\frac{\frac{(lat1 + lat2)}{2}\pi}{180}) abs(lng1 -lng2) $$&lt;/div&gt;
 &lt;p&gt;then apply Pythagorean theorem

@@ -47,4 +47,4 @@ SEARCH_BOX = True
 
 PLUGIN_PATHS = ['./pelican-plugins']
 PLUGINS = ['render_math']
-STATIC_PATHS = ['images','downloads']
+STATIC_PATHS = ['images','downloads','CNAME']

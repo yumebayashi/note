@@ -4,8 +4,10 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tag: sql &mdash; yumebayashi's note</title>
+  <title>Install Gradle &mdash; yumebayashi's note</title>
   <meta name="author" content="yumebayashi">
+
+
 
 
 
@@ -43,47 +45,57 @@
 
 <ul class="main-navigation">
       <li><a href="http://yumebayashi.github.io/note/pages/profile.html">Profile</a></li>
-      <li >
+      <li class="active">
         <a href="http://yumebayashi.github.io/note/category/tech.html">Tech</a>
       </li>
 </ul></nav>
   <div id="main">
     <div id="content">
 <div>
-	<article role="article">
-    	<header>
-    		<h1 class="entry-title">Tag: sql</h1>
-    	</header>
+    <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Install Gradle</h1>
+    <p class="meta">
+<time datetime="2016-08-05T00:00:00+09:00" pubdate>金 05 8月 2016</time>    </p>
+</header>
 
-    	<div id="blog-archives">
-            <h2>2016</h2>
-                    <article>
-                        <h1><a href="http://yumebayashi.github.io/note/calculate-approximate-distance-between-two-latitudelongitude-points-by-simple-query.html">Calculate approximate distance between two latitude/longitude points by simple query</a></h1>
-                        <time datetime="2016-05-11 00:00:00+09:00" pubdate>
-                            <span class="month">5月</span>
-                            <span class="day">11</span>
-                            <span class="year">2016</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='http://yumebayashi.github.io/note/category/tech.html'>tech</a>
-                            </span>
-                        </footer>
-                    </article>
-                    <article>
-                        <h1><a href="http://yumebayashi.github.io/note/query-cheet-sheet-in-redshiftpostgres.html">Query Cheet Sheet in RedShift(Postgres)</a></h1>
-                        <time datetime="2016-05-10 00:00:00+09:00" pubdate>
-                            <span class="month">5月</span>
-                            <span class="day">10</span>
-                            <span class="year">2016</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='http://yumebayashi.github.io/note/category/tech.html'>tech</a>
-                            </span>
-                        </footer>
-                    </article>
-	    </div>
+  <div class="entry-content"><h3>install script for centos</h3>
+<div class="highlight"><pre><span></span><span class="x">cd /opt/</span>
+<span class="x">sudo wget -N https://services.gradle.org/distributions/gradle-2.6-all.zip</span>
+<span class="x">sudo unzip gradle-2.6-all.zip</span>
+<span class="x">sudo rm gradle-2.6-all.zip</span>
+<span class="x">sudo ln -s gradle-2.6 gradle</span>
+<span class="x">sudo printf &quot;export GRADLE_HOME=/opt/gradle\nexport PATH=\</span><span class="p">$</span><span class="nv">PATH</span><span class="x">:\</span><span class="p">$</span><span class="nv">GRADLE_HOME</span><span class="x">/bin&quot; &gt; /etc/profile.d/gradle-env.sh</span>
+<span class="x">source /etc/profile.d/gradle-env.sh</span>
+<span class="x">gradle -version</span>
+</pre></div></div>
+        <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        yumebayashi
+    </span>
+  </span>
+<time datetime="2016-08-05T00:00:00+09:00" pubdate>金 05 8月 2016</time>  <span class="categories">
+    <a class='category' href='http://yumebayashi.github.io/note/category/tech.html'>tech</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="http://yumebayashi.github.io/note/tag/gradle.html">gradle</a>  </span>
+</p> <div class="sharing">
+</div>        </footer>
+        <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_identifier = "install-gradle.html";
+            (function() {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = 'http://yumebayashisnote.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+            </script>
+        </div>
     </article>
 </div>
 <aside class="sidebar">
@@ -91,10 +103,19 @@
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="http://yumebayashi.github.io/note/calculate-approximate-distance-between-two-latitudelongitude-points-by-simple-query.html">Calculate approximate distance between two latitude/longitude points by simple query</a>
+          <a href="http://yumebayashi.github.io/note/install-mecab.html">Install Mecab</a>
       </li>
       <li class="post">
-          <a href="http://yumebayashi.github.io/note/query-cheet-sheet-in-redshiftpostgres.html">Query Cheet Sheet in RedShift(Postgres)</a>
+          <a href="http://yumebayashi.github.io/note/install-gradle.html">Install Gradle</a>
+      </li>
+      <li class="post">
+          <a href="http://yumebayashi.github.io/note/q-command-for-querying-on-csv-file-directly.html">q command for querying on csv file directly</a>
+      </li>
+      <li class="post">
+          <a href="http://yumebayashi.github.io/note/narrative-clip-script-to-make-mp4-from-images.html">Narrative Clip Script to make mp4 from images</a>
+      </li>
+      <li class="post">
+          <a href="http://yumebayashi.github.io/note/eyetribe-demo-using-java.html">EyeTribe demo using java</a>
       </li>
     </ul>
   </section>
@@ -142,6 +163,9 @@
 </script>
   <script type="text/javascript">
     var disqus_shortname = 'yumebayashisnote';
+    var disqus_identifier = '/install-gradle.html';
+    var disqus_url = 'http://yumebayashi.github.io/note/install-gradle.html';
+    var disqus_title = 'Install Gradle';
     (function() {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = "//" + disqus_shortname + '.disqus.com/embed.js';

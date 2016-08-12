@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/tech.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-06-19T00:00:00+09:00</updated><entry><title>q command for querying on csv file directly</title><link href="http://yumebayashi.github.io/note/q-command-for-querying-on-csv-file-directly.html" rel="alternate"></link><published>2016-06-19T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-06-19:note/q-command-for-querying-on-csv-file-directly.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/harelba/q"&gt;https://github.com/harelba/q&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/tech.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-08-12T00:00:00+09:00</updated><entry><title>Install Mecab</title><link href="http://yumebayashi.github.io/note/install-mecab.html" rel="alternate"></link><published>2016-08-12T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-08-12:note/install-mecab.html</id><summary type="html">&lt;h3&gt;Download&lt;/h3&gt;
+&lt;p&gt;Download mecab core and dictionary.&lt;br /&gt;
+&lt;a href="http://taku910.github.io/mecab/#download"&gt;http://taku910.github.io/mecab/#download&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;files are on google drive, if you want to use cli, need to add option like this.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;wget &amp;#39;https://drive.google.com/uc?export=download&amp;amp;id=0B4y35FiV1wh7cENtOXlicTFaRUE&amp;#39; -O mecab-0.996.tar.gz
+wget &amp;#39;https://drive.google.com/uc?export=download&amp;amp;id=0B4y35FiV1wh7MWVlSDBCSXZMTXM&amp;#39; -O mecab-ipadic-2.7.0-20070801.tar.gz 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Install Mecab core&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tar zxfv mecab-0.996.tar.gz
+cd mecab-0.996
+./configure 
+make
+sudo make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Install Dictionary&lt;/h3&gt;
+&lt;p&gt;default char set is &lt;code&gt;EUC-JP&lt;/code&gt;
+In this case, set char set &lt;code&gt;UTF8&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;tar zxfv mecab-ipadic-2.7.0-20070801.tar.gz
+cd mecab-ipadic-2.7.0-20070801
+./configure --enable-utf8-only --with-charset=utf8
+make
+sudo make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;今日はとても熱い&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; mecab
+今日  名詞,副詞可能,*,*,*,*,今日,キョウ,キョー
+は   助詞,係助詞,*,*,*,*,は,ハ,ワ
+とても 副詞,助詞類接続,*,*,*,*,とても,トテモ,トテモ
+熱い  形容詞,自立,*,*,形容詞・アウオ段,基本形,熱い,アツイ,アツイ
+EOS
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="mecab"></category></entry><entry><title>Install Gradle</title><link href="http://yumebayashi.github.io/note/install-gradle.html" rel="alternate"></link><published>2016-08-05T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-08-05:note/install-gradle.html</id><summary type="html">&lt;h3&gt;install script for centos&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="x"&gt;cd /opt/&lt;/span&gt;
+&lt;span class="x"&gt;sudo wget -N https://services.gradle.org/distributions/gradle-2.6-all.zip&lt;/span&gt;
+&lt;span class="x"&gt;sudo unzip gradle-2.6-all.zip&lt;/span&gt;
+&lt;span class="x"&gt;sudo rm gradle-2.6-all.zip&lt;/span&gt;
+&lt;span class="x"&gt;sudo ln -s gradle-2.6 gradle&lt;/span&gt;
+&lt;span class="x"&gt;sudo printf &amp;quot;export GRADLE_HOME=/opt/gradle\nexport PATH=\&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="x"&gt;:\&lt;/span&gt;&lt;span class="p"&gt;$&lt;/span&gt;&lt;span class="nv"&gt;GRADLE_HOME&lt;/span&gt;&lt;span class="x"&gt;/bin&amp;quot; &amp;gt; /etc/profile.d/gradle-env.sh&lt;/span&gt;
+&lt;span class="x"&gt;source /etc/profile.d/gradle-env.sh&lt;/span&gt;
+&lt;span class="x"&gt;gradle -version&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="gradle"></category></entry><entry><title>q command for querying on csv file directly</title><link href="http://yumebayashi.github.io/note/q-command-for-querying-on-csv-file-directly.html" rel="alternate"></link><published>2016-06-19T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-06-19:note/q-command-for-querying-on-csv-file-directly.html</id><summary type="html">&lt;p&gt;&lt;a href="https://github.com/harelba/q"&gt;https://github.com/harelba/q&lt;/a&gt;&lt;/p&gt;
 &lt;h3&gt;environment&lt;/h3&gt;
 &lt;p&gt;requires python 2.X&lt;br /&gt;
 &lt;code&gt;brew install q&lt;/code&gt;  &lt;/p&gt;

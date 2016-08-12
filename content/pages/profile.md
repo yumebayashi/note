@@ -3,7 +3,9 @@ title:Profile
 ## CyberAgent(2014/2 – Present)
 Software Engineer, AdTech
 
-### Location Based Ad Network/DMP(Data Management Platform) 2015 -
+### Location Based ADNW/DMP 2015 -
+role: tech lead  
+
 * developped batch tasks for reporting.
 * developped user segmentation system.
 * developped adserver.
@@ -12,16 +14,17 @@ Software Engineer, AdTech
 * etc
 
 ### System  
-* Mainly AWS
+* mainly AWS
 ### Language  
-* Mainly used Java
+* mainly used Java
 * Python
 * Ruby
 * Javascript
 ### Databases  
-* Mysql
-* Postgres
-* Redis
+* RDS(Mysql)
+* RedShift(Postgres)
+* ElasticCache(Redis)
+* DynamoDB
 * etc
 ### Technologies(Frameworks/Build,etc)  
 * MyBatis
@@ -40,17 +43,17 @@ Software Engineer, AdTech
 * etc
 
 ### System  
-* Mainly AWS
+* mainly AWS
 
 ### Language   
-* Mainly used Java
+* mainly used Java
 * Python  
 * Ruby
 
 ### Databases  
-* Mysql
-* Postgres
-* Redis
+* RDS(Mysql)
+* RedShift(Postgres)
+* ElasticCache(Redis)
 
 ### Technologies(Frameworks/Build,etc)  
 * Tomcat

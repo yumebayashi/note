@@ -1,7 +1,7 @@
 Title:Export results with CSV files with MySQL, Postgres
 Date: 2016-09-12
 Category: tech
-Tags: mysql,posgres
+Tags: mysql,postgres
 Author: yumebayashi
 
 ## Environments
@@ -28,13 +28,13 @@ Author: yumebayashi
 -t, --tuples-only : print rows only(ignore header)
 ```
 
-*if you want to skip password request `Password for user hoge:`
+*if you want to skip password request `Password for user hoge:`  
 add below file
 
-dir:`$HOME/.pgpass`
-file format:`[host]:[port]:[database]:[user]:[pass]`
-ex) `localhost:5432:mydb:hoge:huga`
-permission:`chmod 600 $HOME/.pgpass`
+dir:`$HOME/.pgpass`  
+file format:`[host]:[port]:[database]:[user]:[pass]`  
+ex) `localhost:5432:mydb:hoge:huga`  
+permission:`chmod 600 $HOME/.pgpass`  
 
 
 

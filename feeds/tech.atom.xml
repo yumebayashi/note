@@ -21,14 +21,14 @@
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;*if you want to skip password request &lt;code&gt;Password for user hoge:&lt;/code&gt;
+&lt;p&gt;*if you want to skip password request &lt;code&gt;Password for user hoge:&lt;/code&gt;&lt;br /&gt;
 add below file&lt;/p&gt;
-&lt;p&gt;dir:&lt;code&gt;$HOME/.pgpass&lt;/code&gt;
-file format:&lt;code&gt;[host]:[port]:[database]:[user]:[pass]&lt;/code&gt;
-ex) &lt;code&gt;localhost:5432:mydb:hoge:huga&lt;/code&gt;
-permission:&lt;code&gt;chmod 600 $HOME/.pgpass&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;dir:&lt;code&gt;$HOME/.pgpass&lt;/code&gt;&lt;br /&gt;
+file format:&lt;code&gt;[host]:[port]:[database]:[user]:[pass]&lt;/code&gt;&lt;br /&gt;
+ex) &lt;code&gt;localhost:5432:mydb:hoge:huga&lt;/code&gt;&lt;br /&gt;
+permission:&lt;code&gt;chmod 600 $HOME/.pgpass&lt;/code&gt;  &lt;/p&gt;
 &lt;h2&gt;MySQL&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;mysql -uhoge -phuga -hlocalhost mydb -e"select id,name from users" | tr '\t' ',' &amp;gt; user.csv&lt;/code&gt;&lt;/p&gt;</summary><category term="mysql"></category><category term="posgres"></category></entry><entry><title>Chrome Search Setting</title><link href="http://yumebayashi.github.io/note/chrome-search-setting.html" rel="alternate"></link><published>2016-09-06T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-09-06:note/chrome-search-setting.html</id><summary type="html">&lt;h3&gt;Setting&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;mysql -uhoge -phuga -hlocalhost mydb -e"select id,name from users" | tr '\t' ',' &amp;gt; user.csv&lt;/code&gt;&lt;/p&gt;</summary><category term="mysql"></category><category term="postgres"></category></entry><entry><title>Chrome Search Setting</title><link href="http://yumebayashi.github.io/note/chrome-search-setting.html" rel="alternate"></link><published>2016-09-06T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-09-06:note/chrome-search-setting.html</id><summary type="html">&lt;h3&gt;Setting&lt;/h3&gt;
 &lt;p&gt;go to chrome setting page
 &lt;a href="chrome://settings/"&gt;chrome://settings/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="/images/chrome.png" width="100%" &gt;&lt;/p&gt;

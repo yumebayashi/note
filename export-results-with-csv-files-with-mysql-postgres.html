@@ -4,8 +4,10 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tag: q &mdash; yumebayashi's note</title>
+  <title>Export results with CSV files with MySQL, Postgres &mdash; yumebayashi's note</title>
   <meta name="author" content="yumebayashi">
+
+
 
 
 
@@ -43,40 +45,95 @@
 
 <ul class="main-navigation">
       <li><a href="http://yumebayashi.github.io/note/pages/profile.html">Profile</a></li>
-      <li >
+      <li class="active">
         <a href="http://yumebayashi.github.io/note/category/tech.html">Tech</a>
       </li>
 </ul></nav>
   <div id="main">
     <div id="content">
 <div>
-	<article role="article">
-    	<header>
-    		<h1 class="entry-title">Tag: q</h1>
-    	</header>
+    <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Export results with CSV files with MySQL, Postgres</h1>
+    <p class="meta">
+<time datetime="2016-09-12T00:00:00+09:00" pubdate>月 12 9月 2016</time>    </p>
+</header>
 
-    	<div id="blog-archives">
-            <h2>2016</h2>
-                    <article>
-                        <h1><a href="http://yumebayashi.github.io/note/q-command-for-querying-on-csv-file-directly.html">q command for querying on csv file directly</a></h1>
-                        <time datetime="2016-06-19 00:00:00+09:00" pubdate>
-                            <span class="month">6月</span>
-                            <span class="day">19</span>
-                            <span class="year">2016</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='http://yumebayashi.github.io/note/category/tech.html'>tech</a>
-                            </span>
-                        </footer>
-                    </article>
-	    </div>
+  <div class="entry-content"><h2>Environments</h2>
+<h3>db</h3>
+<ul>
+<li>postgres:9.4.4</li>
+<li>mysql5.6.26</li>
+</ul>
+<h3>db-config</h3>
+<ul>
+<li>user:hoge</li>
+<li>password:fuga</li>
+<li>host:localhost</li>
+<li>database:mydb</li>
+</ul>
+<h2>Postgres</h2>
+<p><code>psql -h localhost -U hoge mydb -c "select id,name from users" -A -F, -t &gt; user.csv</code></p>
+<h3>option</h3>
+<div class="highlight"><pre><span></span>-A, --no-align : unaligned table output mode
+-F, --field-separator=STRING : field separator for unaligned output (default: &quot;|&quot;)
+-t, --tuples-only : print rows only(ignore header)
+</pre></div>
+
+
+<p>*if you want to skip password request <code>Password for user hoge:</code>
+add below file</p>
+<p>dir:<code>$HOME/.pgpass</code>
+file format:<code>[host]:[port]:[database]:[user]:[pass]</code>
+ex) <code>localhost:5432:mydb:hoge:huga</code>
+permission:<code>chmod 600 $HOME/.pgpass</code></p>
+<h2>MySQL</h2>
+<p><code>mysql -uhoge -phuga -hlocalhost mydb -e"select id,name from users" | tr '\t' ',' &gt; user.csv</code></p></div>
+        <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        yumebayashi
+    </span>
+  </span>
+<time datetime="2016-09-12T00:00:00+09:00" pubdate>月 12 9月 2016</time>  <span class="categories">
+    <a class='category' href='http://yumebayashi.github.io/note/category/tech.html'>tech</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="http://yumebayashi.github.io/note/tag/mysql.html">mysql</a>,    <a class="category" href="http://yumebayashi.github.io/note/tag/posgres.html">posgres</a>  </span>
+</p> <div class="sharing">
+</div>        </footer>
+        <div class="comments">
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+            var disqus_identifier = "export-results-with-csv-files-with-mysql-postgres.html";
+            (function() {
+                var dsq = document.createElement('script');
+                dsq.type = 'text/javascript';
+                dsq.async = true;
+                dsq.src = 'http://yumebayashisnote.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+            </script>
+        </div>
     </article>
 </div>
 <aside class="sidebar">
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="http://yumebayashi.github.io/note/export-results-with-csv-files-with-mysql-postgres.html">Export results with CSV files with MySQL, Postgres</a>
+      </li>
+      <li class="post">
+          <a href="http://yumebayashi.github.io/note/chrome-search-setting.html">Chrome Search Setting</a>
+      </li>
+      <li class="post">
+          <a href="http://yumebayashi.github.io/note/install-mecab.html">Install Mecab</a>
+      </li>
+      <li class="post">
+          <a href="http://yumebayashi.github.io/note/install-gradle.html">Install Gradle</a>
+      </li>
       <li class="post">
           <a href="http://yumebayashi.github.io/note/q-command-for-querying-on-csv-file-directly.html">q command for querying on csv file directly</a>
       </li>
@@ -126,6 +183,9 @@
 </script>
   <script type="text/javascript">
     var disqus_shortname = 'yumebayashisnote';
+    var disqus_identifier = '/export-results-with-csv-files-with-mysql-postgres.html';
+    var disqus_url = 'http://yumebayashi.github.io/note/export-results-with-csv-files-with-mysql-postgres.html';
+    var disqus_title = 'Export results with CSV files with MySQL, Postgres';
     (function() {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
       dsq.src = "//" + disqus_shortname + '.disqus.com/embed.js';

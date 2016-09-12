@@ -53,6 +53,37 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="http://yumebayashi.github.io/note/export-results-with-csv-files-with-mysql-postgres.html">Export results with CSV files with MySQL, Postgres</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-09-12T00:00:00+09:00" pubdate>月 12 9月 2016</time>    </p>
+</header>
+
+  <div class="entry-content"><h2>Environments</h2>
+<h3>db</h3>
+<ul>
+<li>postgres:9.4.4</li>
+<li>mysql5.6.26</li>
+</ul>
+<h3>db-config</h3>
+<ul>
+<li>user:hoge</li>
+<li>password:fuga</li>
+<li>host:localhost</li>
+<li>database:mydb</li>
+</ul>
+<h2>Postgres</h2>
+<p><code>psql -h localhost -U hoge mydb -c "select id,name from users" -A -F, -t &gt; user.csv</code></p>
+<h3>option</h3>
+<div class="highlight"><pre><span></span>-A, --no-align : unaligned table output mode
+-F, --field-separator=STRING : field separator for unaligned ...</pre></div></div>
+  <footer>
+    <a rel="full-article" href="http://yumebayashi.github.io/note/export-results-with-csv-files-with-mysql-postgres.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="http://yumebayashi.github.io/note/chrome-search-setting.html">Chrome Search Setting</a>
       </h1>
     <p class="meta">
@@ -265,44 +296,8 @@ The upper limit is 60 ...</p></div>
     <a rel="full-article" href="http://yumebayashi.github.io/note/query-cheet-sheet-in-redshiftpostgres.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="http://yumebayashi.github.io/note/redshift-query-tips.html">RedShift Query Tips</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-05-09T00:00:00+09:00" pubdate>月 09 5月 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><ul>
-<li>Confirm table definition</li>
-</ul>
-<div class="highlight"><pre><span></span>select * from pg_table_def where tablename = &#39;target_table&#39;;
-</pre></div>
-
-
-<ul>
-<li>Check running query and its pid<ul>
-<li>terminate query -&gt; <code>cancel {pid}</code></li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre><span></span>select pid,starttime, left(query,50) from stv_recents where status=&#39;Running&#39;;
-</pre></div>
-
-
-<ul>
-<li>Check whether the table needs to be vacuumed or not</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="cm">/** 0.not vacuumed table */</span><span class="w"></span>
-<span class="kr">select</span><span class="w"></span>
-<span class="w">  </span><span class="s">&#39;0_not_sorted&#39;</span><span class="w"> </span>as<span class="w"> </span>status<span class="o">,</span><span class="w"></span>
-<span class="w">  </span>sum_result<span class="o">.</span>tablename ...</pre></div></div>
-  <footer>
-    <a rel="full-article" href="http://yumebayashi.github.io/note/redshift-query-tips.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
+    <a class="prev" href="http://yumebayashi.github.io/note/index2.html">&larr; Older</a>
 
   <br />
 </div></div>
@@ -310,6 +305,9 @@ The upper limit is 60 ...</p></div>
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="http://yumebayashi.github.io/note/export-results-with-csv-files-with-mysql-postgres.html">Export results with CSV files with MySQL, Postgres</a>
+      </li>
       <li class="post">
           <a href="http://yumebayashi.github.io/note/chrome-search-setting.html">Chrome Search Setting</a>
       </li>
@@ -321,9 +319,6 @@ The upper limit is 60 ...</p></div>
       </li>
       <li class="post">
           <a href="http://yumebayashi.github.io/note/q-command-for-querying-on-csv-file-directly.html">q command for querying on csv file directly</a>
-      </li>
-      <li class="post">
-          <a href="http://yumebayashi.github.io/note/narrative-clip-script-to-make-mp4-from-images.html">Narrative Clip Script to make mp4 from images</a>
       </li>
     </ul>
   </section>
@@ -338,7 +333,7 @@ The upper limit is 60 ...</p></div>
 
   <section>
   <h1>Tags</h1>
-    <a href="http://yumebayashi.github.io/note/tag/q.html">q</a>,    <a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a>,    <a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a>,    <a href="http://yumebayashi.github.io/note/tag/python.html">python</a>,    <a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a>,    <a href="http://yumebayashi.github.io/note/tag/opencv.html">opencv</a>,    <a href="http://yumebayashi.github.io/note/tag/eyetribe.html">eyetribe</a>,    <a href="http://yumebayashi.github.io/note/tag/narrativeclip.html">narrativeclip</a>,    <a href="http://yumebayashi.github.io/note/tag/gradle.html">gradle</a>,    <a href="http://yumebayashi.github.io/note/tag/script.html">script</a>,    <a href="http://yumebayashi.github.io/note/tag/shell.html">shell</a>,    <a href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a href="http://yumebayashi.github.io/note/tag/chrome.html">chrome</a>,    <a href="http://yumebayashi.github.io/note/tag/query.html">query</a>,    <a href="http://yumebayashi.github.io/note/tag/java.html">java</a>,    <a href="http://yumebayashi.github.io/note/tag/mecab.html">mecab</a>  </section>
+    <a href="http://yumebayashi.github.io/note/tag/shell.html">shell</a>,    <a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a>,    <a href="http://yumebayashi.github.io/note/tag/java.html">java</a>,    <a href="http://yumebayashi.github.io/note/tag/query.html">query</a>,    <a href="http://yumebayashi.github.io/note/tag/eyetribe.html">eyetribe</a>,    <a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a>,    <a href="http://yumebayashi.github.io/note/tag/script.html">script</a>,    <a href="http://yumebayashi.github.io/note/tag/opencv.html">opencv</a>,    <a href="http://yumebayashi.github.io/note/tag/chrome.html">chrome</a>,    <a href="http://yumebayashi.github.io/note/tag/mysql.html">mysql</a>,    <a href="http://yumebayashi.github.io/note/tag/gradle.html">gradle</a>,    <a href="http://yumebayashi.github.io/note/tag/mecab.html">mecab</a>,    <a href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a href="http://yumebayashi.github.io/note/tag/posgres.html">posgres</a>,    <a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a>,    <a href="http://yumebayashi.github.io/note/tag/narrativeclip.html">narrativeclip</a>,    <a href="http://yumebayashi.github.io/note/tag/q.html">q</a>,    <a href="http://yumebayashi.github.io/note/tag/python.html">python</a>  </section>
 
 
 

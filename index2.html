@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tag: q &mdash; yumebayashi's note</title>
+  <title>yumebayashi's note</title>
   <meta name="author" content="yumebayashi">
 
 
@@ -49,34 +49,65 @@
 </ul></nav>
   <div id="main">
     <div id="content">
-<div>
-	<article role="article">
-    	<header>
-    		<h1 class="entry-title">Tag: q</h1>
-    	</header>
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://yumebayashi.github.io/note/redshift-query-tips.html">RedShift Query Tips</a>
+      </h1>
+    <p class="meta">
+<time datetime="2016-05-09T00:00:00+09:00" pubdate>月 09 5月 2016</time>    </p>
+</header>
 
-    	<div id="blog-archives">
-            <h2>2016</h2>
-                    <article>
-                        <h1><a href="http://yumebayashi.github.io/note/q-command-for-querying-on-csv-file-directly.html">q command for querying on csv file directly</a></h1>
-                        <time datetime="2016-06-19 00:00:00+09:00" pubdate>
-                            <span class="month">6月</span>
-                            <span class="day">19</span>
-                            <span class="year">2016</span>
-                        </time>
-                        <footer>
-                            <span class="categories">posted in
-                                <a class='category' href='http://yumebayashi.github.io/note/category/tech.html'>tech</a>
-                            </span>
-                        </footer>
-                    </article>
-	    </div>
-    </article>
-</div>
+  <div class="entry-content"><ul>
+<li>Confirm table definition</li>
+</ul>
+<div class="highlight"><pre><span></span>select * from pg_table_def where tablename = &#39;target_table&#39;;
+</pre></div>
+
+
+<ul>
+<li>Check running query and its pid<ul>
+<li>terminate query -&gt; <code>cancel {pid}</code></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span>select pid,starttime, left(query,50) from stv_recents where status=&#39;Running&#39;;
+</pre></div>
+
+
+<ul>
+<li>Check whether the table needs to be vacuumed or not</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="cm">/** 0.not vacuumed table */</span><span class="w"></span>
+<span class="kr">select</span><span class="w"></span>
+<span class="w">  </span><span class="s">&#39;0_not_sorted&#39;</span><span class="w"> </span>as<span class="w"> </span>status<span class="o">,</span><span class="w"></span>
+<span class="w">  </span>sum_result<span class="o">.</span>tablename ...</pre></div></div>
+  <footer>
+    <a rel="full-article" href="http://yumebayashi.github.io/note/redshift-query-tips.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+
+    <a class="next" href="http://yumebayashi.github.io/note/index.html">Newer &rarr;</a>
+  <br />
+</div></div>
 <aside class="sidebar">
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="http://yumebayashi.github.io/note/export-results-with-csv-files-with-mysql-postgres.html">Export results with CSV files with MySQL, Postgres</a>
+      </li>
+      <li class="post">
+          <a href="http://yumebayashi.github.io/note/chrome-search-setting.html">Chrome Search Setting</a>
+      </li>
+      <li class="post">
+          <a href="http://yumebayashi.github.io/note/install-mecab.html">Install Mecab</a>
+      </li>
+      <li class="post">
+          <a href="http://yumebayashi.github.io/note/install-gradle.html">Install Gradle</a>
+      </li>
       <li class="post">
           <a href="http://yumebayashi.github.io/note/q-command-for-querying-on-csv-file-directly.html">q command for querying on csv file directly</a>
       </li>

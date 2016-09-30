@@ -1,4 +1,4 @@
-Title:Chrome Search Setting
+Title:Chrome Custom Search Setting
 Date: 2016-09-06
 Category: tech
 Tags:chrome
@@ -21,3 +21,5 @@ y http://www.youtube.com/results?search_query=%s
 h http://b.hatena.ne.jp/search/text?q=%s
 w http://ja.wikipedia.org/w/index.php?search=%s
 ```
+
+you can add a custom search engine in new tab with short cut

@@ -28,7 +28,7 @@ file format:&lt;code&gt;[host]:[port]:[database]:[user]:[pass]&lt;/code&gt;&lt;b
 ex) &lt;code&gt;localhost:5432:mydb:hoge:huga&lt;/code&gt;&lt;br /&gt;
 permission:&lt;code&gt;chmod 600 $HOME/.pgpass&lt;/code&gt;  &lt;/p&gt;
 &lt;h2&gt;MySQL&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;mysql -uhoge -phuga -hlocalhost mydb -e"select id,name from users" | tr '\t' ',' &amp;gt; user.csv&lt;/code&gt;&lt;/p&gt;</summary><category term="mysql"></category><category term="postgres"></category></entry><entry><title>Chrome Search Setting</title><link href="http://yumebayashi.github.io/note/chrome-search-setting.html" rel="alternate"></link><published>2016-09-06T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-09-06:note/chrome-search-setting.html</id><summary type="html">&lt;h3&gt;Setting&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;mysql -uhoge -phuga -hlocalhost mydb -e"select id,name from users" | tr '\t' ',' &amp;gt; user.csv&lt;/code&gt;&lt;/p&gt;</summary><category term="mysql"></category><category term="postgres"></category></entry><entry><title>Chrome Custom Search Setting</title><link href="http://yumebayashi.github.io/note/chrome-custom-search-setting.html" rel="alternate"></link><published>2016-09-06T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-09-06:note/chrome-custom-search-setting.html</id><summary type="html">&lt;h3&gt;Setting&lt;/h3&gt;
 &lt;p&gt;go to chrome setting page
 &lt;a href="chrome://settings/"&gt;chrome://settings/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src="/images/chrome.png" width="100%" &gt;&lt;/p&gt;
@@ -39,7 +39,10 @@ ama https://www.amazon.co.jp/s?field-keywords=%s
 y http://www.youtube.com/results?search_query=%s
 h http://b.hatena.ne.jp/search/text?q=%s
 w http://ja.wikipedia.org/w/index.php?search=%s
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="chrome"></category></entry><entry><title>Install Mecab</title><link href="http://yumebayashi.github.io/note/install-mecab.html" rel="alternate"></link><published>2016-08-12T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-08-12:note/install-mecab.html</id><summary type="html">&lt;h3&gt;Download&lt;/h3&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;you can add a custom search engine in new tab with short cut&lt;/p&gt;</summary><category term="chrome"></category></entry><entry><title>Install Mecab</title><link href="http://yumebayashi.github.io/note/install-mecab.html" rel="alternate"></link><published>2016-08-12T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-08-12:note/install-mecab.html</id><summary type="html">&lt;h3&gt;Download&lt;/h3&gt;
 &lt;p&gt;Download mecab core and dictionary.&lt;br /&gt;
 &lt;a href="http://taku910.github.io/mecab/#download"&gt;http://taku910.github.io/mecab/#download&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;files are on google drive, if you want to use cli, need to add option like this.&lt;/p&gt;

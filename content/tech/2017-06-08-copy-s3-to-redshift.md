@@ -13,7 +13,7 @@ delimiter '\t' gzip maxerror 100;
 When importing csv data from s3 to redshift,
 We can use `delimiter ','` or `CSV` option.
 There two options are different.
-If we use "CSV" option, we can import such as this file 
+If we use `CSV` option, we can import such as this file 
 
 ```
 123,aaa,bbb,"223,54234",111

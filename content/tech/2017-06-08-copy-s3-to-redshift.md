@@ -4,9 +4,11 @@ Category: tech
 Tags: s3,redshift
 Author: yumebayashi
 
+```
 copy table_name from 's3://bucket/path/' CREDENTIALS 
 'aws_access_key_id=[access_key];aws_secret_access_key=[secret_key]' 
 delimiter '\t' gzip maxerror 100;
+```
 
 When importing csv data from s3 to redshift,
 We can use `delimiter ','` or `CSV` option.

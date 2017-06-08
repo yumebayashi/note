@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/tech.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2016-09-12T00:00:00+09:00</updated><entry><title>Export results with CSV files with MySQL, Postgres</title><link href="http://yumebayashi.github.io/note/export-results-with-csv-files-with-mysql-postgres.html" rel="alternate"></link><published>2016-09-12T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-09-12:note/export-results-with-csv-files-with-mysql-postgres.html</id><summary type="html">&lt;h2&gt;Environments&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>yumebayashi's note</title><link href="http://yumebayashi.github.io/note/" rel="alternate"></link><link href="http://yumebayashi.github.io/note/feeds/tech.atom.xml" rel="self"></link><id>http://yumebayashi.github.io/note/</id><updated>2017-06-07T00:00:00+09:00</updated><entry><title>Copy S3 to Redshift</title><link href="http://yumebayashi.github.io/note/copy-s3-to-redshift.html" rel="alternate"></link><published>2017-06-07T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2017-06-07:note/copy-s3-to-redshift.html</id><summary type="html">&lt;p&gt;copy table_name from 's3://bucket/path/' CREDENTIALS 
+'aws_access_key_id=[access_key];aws_secret_access_key=[secret_key]' 
+delimiter '\t' gzip maxerror 100;&lt;/p&gt;
+&lt;p&gt;When importing csv data from s3 to redshift,
+We can use &lt;code&gt;delimiter ','&lt;/code&gt; or &lt;code&gt;CSV&lt;/code&gt; option.
+There two options are different.
+If we use "CSV" option, we can import such as this file &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;123,aaa,bbb,&amp;quot;223,54234&amp;quot;,111
+345,aaa,bbb,777,666
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If we use &lt;code&gt;delimiter ',' escape&lt;/code&gt; option, we can import such as this file &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;1,aaa
+2,bbb\,bbb
+3,ccc
+4,ddd
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="s3"></category><category term="redshift"></category></entry><entry><title>Export results with CSV files with MySQL, Postgres</title><link href="http://yumebayashi.github.io/note/export-results-with-csv-files-with-mysql-postgres.html" rel="alternate"></link><published>2016-09-12T00:00:00+09:00</published><author><name>yumebayashi</name></author><id>tag:yumebayashi.github.io,2016-09-12:note/export-results-with-csv-files-with-mysql-postgres.html</id><summary type="html">&lt;h2&gt;Environments&lt;/h2&gt;
 &lt;h3&gt;db&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;postgres:9.4.4&lt;/li&gt;

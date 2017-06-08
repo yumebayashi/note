@@ -1,4 +1,4 @@
-Title: Copy S3 to Redshift
+Title: Copy S3 to Redshift, the difference between delimiter ',' and CSV
 Date: 2017-06-07
 Category: tech
 Tags: s3,redshift

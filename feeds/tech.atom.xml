@@ -8,7 +8,7 @@ delimiter &amp;#39;\t&amp;#39; gzip maxerror 100;
 &lt;p&gt;When importing csv data from s3 to redshift,
 We can use &lt;code&gt;delimiter ','&lt;/code&gt; or &lt;code&gt;CSV&lt;/code&gt; option.
 There two options are different.
-If we use "CSV" option, we can import such as this file &lt;/p&gt;
+If we use &lt;code&gt;CSV&lt;/code&gt; option, we can import such as this file &lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;123,aaa,bbb,&amp;quot;223,54234&amp;quot;,111
 345,aaa,bbb,777,666
 &lt;/pre&gt;&lt;/div&gt;

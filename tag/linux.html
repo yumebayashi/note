@@ -4,7 +4,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>yumebayashi's note</title>
+  <title>Tag: linux &mdash; yumebayashi's note</title>
   <meta name="author" content="yumebayashi">
 
 
@@ -49,129 +49,36 @@
 </ul></nav>
   <div id="main">
     <div id="content">
-<div class="blog-index">
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="http://yumebayashi.github.io/note/calculate-approximate-distance-between-two-latitudelongitude-points-by-simple-query.html">Calculate approximate distance between two latitude/longitude points by simple query</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-05-11T00:00:00+09:00" pubdate>水 11 5月 2016</time>    </p>
-</header>
+<div>
+	<article role="article">
+    	<header>
+    		<h1 class="entry-title">Tag: linux</h1>
+    	</header>
 
-  <div class="entry-content"><ul>
-<li>make initial data set</li>
-</ul>
-<div class="highlight"><pre><span></span>CREATE TABLE tmp_test (
-   name character varying(255),
-   lat1 numeric(8,5),
-   lng1 numeric(8,5),
-   lat2 numeric(8,5),
-   lng2 numeric(8,5)
-)
-</pre></div>
-
-
-<div class="highlight"><pre><span></span>INSERT INTO tmp_test VALUES
-(&#39;tokyo-shinjuku&#39;,35.680605, 139.767351,35.689862,139.700253);
-</pre></div>
-
-
-<div class="highlight"><pre><span></span>select * from tmp_test ;
-      name      |   lat1   |   lng1    |   lat2   |   lng2
-----------------+----------+-----------+----------+-----------
- tokyo-shinjuku | 35 ...</pre></div></div>
-  <footer>
-    <a rel="full-article" href="http://yumebayashi.github.io/note/calculate-approximate-distance-between-two-latitudelongitude-points-by-simple-query.html">Read On &crarr;</a>
-  </footer>
-  		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="http://yumebayashi.github.io/note/query-cheet-sheet-in-redshiftpostgres.html">Query Cheet Sheet in RedShift(Postgres)</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-05-10T00:00:00+09:00" pubdate>火 10 5月 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><div class="highlight"><pre><span></span>CREATE TABLE tmp_test (
-   name character varying(255),
-   value1 numeric(8,5),
-   value2 numeric(8,5),
-   created_at timestamp
-)
-</pre></div>
-
-
-<h3>bulk insert &amp; create table</h3>
-<div class="highlight"><pre><span></span>INSERT INTO tmp_test (name,value1,value2,created_at) VALUES
-(&#39;a&#39;,11.111, 111.11, getdate()),
-(&#39;b&#39;,22.222, 222.22, getdate() + interval &#39;1 day&#39;),
-(&#39;c&#39;,33.333, 333.33, getdate ...</pre></div></div>
-  <footer>
-    <a rel="full-article" href="http://yumebayashi.github.io/note/query-cheet-sheet-in-redshiftpostgres.html">Read On &crarr;</a>
-  </footer>
-  		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="http://yumebayashi.github.io/note/redshift-query-tips.html">RedShift Query Tips</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-05-09T00:00:00+09:00" pubdate>月 09 5月 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><ul>
-<li>Confirm table definition</li>
-</ul>
-<div class="highlight"><pre><span></span>select * from pg_table_def where tablename = &#39;target_table&#39;;
-</pre></div>
-
-
-<ul>
-<li>Check running query and its pid<ul>
-<li>terminate query -&gt; <code>cancel {pid}</code></li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre><span></span>select pid,starttime, left(query,50) from stv_recents where status=&#39;Running&#39;;
-</pre></div>
-
-
-<ul>
-<li>Check whether the table needs to be vacuumed or not</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="cm">/** 0.not vacuumed table */</span><span class="w"></span>
-<span class="kr">select</span><span class="w"></span>
-<span class="w">  </span><span class="s">&#39;0_not_sorted&#39;</span><span class="w"> </span>as<span class="w"> </span>status<span class="o">,</span><span class="w"></span>
-<span class="w">  </span>sum_result<span class="o">.</span>tablename ...</pre></div></div>
-  <footer>
-    <a rel="full-article" href="http://yumebayashi.github.io/note/redshift-query-tips.html">Read On &crarr;</a>
-  </footer>
-  		</article>
-<div class="pagination">
-
-    <a class="next" href="http://yumebayashi.github.io/note/index.html">Newer &rarr;</a>
-  <br />
-</div></div>
+    	<div id="blog-archives">
+            <h2>2017</h2>
+                    <article>
+                        <h1><a href="http://yumebayashi.github.io/note/replace-tab-with-comma-using-sed-on-macos.html">Replace tab with comma using sed on MacOS</a></h1>
+                        <time datetime="2017-06-14 00:00:00+09:00" pubdate>
+                            <span class="month">6月</span>
+                            <span class="day">14</span>
+                            <span class="year">2017</span>
+                        </time>
+                        <footer>
+                            <span class="categories">posted in
+                                <a class='category' href='http://yumebayashi.github.io/note/category/tech.html'>tech</a>
+                            </span>
+                        </footer>
+                    </article>
+	    </div>
+    </article>
+</div>
 <aside class="sidebar">
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
           <a href="http://yumebayashi.github.io/note/replace-tab-with-comma-using-sed-on-macos.html">Replace tab with comma using sed on MacOS</a>
-      </li>
-      <li class="post">
-          <a href="http://yumebayashi.github.io/note/copy-s3-to-redshift-the-difference-between-delimiter-and-csv.html">Copy S3 to Redshift, the difference between delimiter ',' and CSV</a>
-      </li>
-      <li class="post">
-          <a href="http://yumebayashi.github.io/note/export-results-with-csv-files-with-mysql-postgres.html">Export results with CSV files with MySQL, Postgres</a>
-      </li>
-      <li class="post">
-          <a href="http://yumebayashi.github.io/note/chrome-custom-search-setting.html">Chrome Custom Search Setting</a>
-      </li>
-      <li class="post">
-          <a href="http://yumebayashi.github.io/note/install-mecab.html">Install Mecab</a>
       </li>
     </ul>
   </section>
@@ -193,7 +100,7 @@
 </aside>    </div>
   </div>
   <footer role="contentinfo"><p>
-    Copyright &copy;  2016&ndash;2017  yumebayashi &mdash;
+    Copyright &copy;  2017  yumebayashi &mdash;
   <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
 </p></footer>
   <script src="http://yumebayashi.github.io/note/theme/js/modernizr-2.0.js"></script>

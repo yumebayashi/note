@@ -53,6 +53,19 @@
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="http://yumebayashi.github.io/note/replace-tab-with-comma-using-sed-on-macos.html">Replace tab with comma using sed on MacOS</a>
+      </h1>
+    <p class="meta">
+<time datetime="2017-06-14T00:00:00+09:00" pubdate>水 14 6月 2017</time>    </p>
+</header>
+
+  <div class="entry-content"><p>mac os doesn't recognize <code>\t</code> as tab charactor. </p>
+<div class="highlight"><pre><span></span>sed -e &#39;s/[[:cntrl:]]/,/g&#39; text
+</pre></div></div>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="http://yumebayashi.github.io/note/copy-s3-to-redshift-the-difference-between-delimiter-and-csv.html">Copy S3 to Redshift, the difference between delimiter ',' and CSV</a>
       </h1>
     <p class="meta">
@@ -258,41 +271,6 @@ The upper limit is 60 ...</p></div>
 // [&quot;h&quot;, &quot;o&quot;, &quot;g&quot;, &quot;e&quot;]
 </pre></div></div>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="http://yumebayashi.github.io/note/calculate-approximate-distance-between-two-latitudelongitude-points-by-simple-query.html">Calculate approximate distance between two latitude/longitude points by simple query</a>
-      </h1>
-    <p class="meta">
-<time datetime="2016-05-11T00:00:00+09:00" pubdate>水 11 5月 2016</time>    </p>
-</header>
-
-  <div class="entry-content"><ul>
-<li>make initial data set</li>
-</ul>
-<div class="highlight"><pre><span></span>CREATE TABLE tmp_test (
-   name character varying(255),
-   lat1 numeric(8,5),
-   lng1 numeric(8,5),
-   lat2 numeric(8,5),
-   lng2 numeric(8,5)
-)
-</pre></div>
-
-
-<div class="highlight"><pre><span></span>INSERT INTO tmp_test VALUES
-(&#39;tokyo-shinjuku&#39;,35.680605, 139.767351,35.689862,139.700253);
-</pre></div>
-
-
-<div class="highlight"><pre><span></span>select * from tmp_test ;
-      name      |   lat1   |   lng1    |   lat2   |   lng2
-----------------+----------+-----------+----------+-----------
- tokyo-shinjuku | 35 ...</pre></div></div>
-  <footer>
-    <a rel="full-article" href="http://yumebayashi.github.io/note/calculate-approximate-distance-between-two-latitudelongitude-points-by-simple-query.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="http://yumebayashi.github.io/note/index2.html">&larr; Older</a>
 
@@ -302,6 +280,9 @@ The upper limit is 60 ...</p></div>
   <section>
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
+      <li class="post">
+          <a href="http://yumebayashi.github.io/note/replace-tab-with-comma-using-sed-on-macos.html">Replace tab with comma using sed on MacOS</a>
+      </li>
       <li class="post">
           <a href="http://yumebayashi.github.io/note/copy-s3-to-redshift-the-difference-between-delimiter-and-csv.html">Copy S3 to Redshift, the difference between delimiter ',' and CSV</a>
       </li>
@@ -313,9 +294,6 @@ The upper limit is 60 ...</p></div>
       </li>
       <li class="post">
           <a href="http://yumebayashi.github.io/note/install-mecab.html">Install Mecab</a>
-      </li>
-      <li class="post">
-          <a href="http://yumebayashi.github.io/note/install-gradle.html">Install Gradle</a>
       </li>
     </ul>
   </section>
@@ -330,7 +308,7 @@ The upper limit is 60 ...</p></div>
 
   <section>
   <h1>Tags</h1>
-    <a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a>,    <a href="http://yumebayashi.github.io/note/tag/chrome.html">chrome</a>,    <a href="http://yumebayashi.github.io/note/tag/query.html">query</a>,    <a href="http://yumebayashi.github.io/note/tag/mysql.html">mysql</a>,    <a href="http://yumebayashi.github.io/note/tag/s3.html">s3</a>,    <a href="http://yumebayashi.github.io/note/tag/eyetribe.html">eyetribe</a>,    <a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a>,    <a href="http://yumebayashi.github.io/note/tag/shell.html">shell</a>,    <a href="http://yumebayashi.github.io/note/tag/gradle.html">gradle</a>,    <a href="http://yumebayashi.github.io/note/tag/script.html">script</a>,    <a href="http://yumebayashi.github.io/note/tag/java.html">java</a>,    <a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a>,    <a href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a href="http://yumebayashi.github.io/note/tag/q.html">q</a>,    <a href="http://yumebayashi.github.io/note/tag/python.html">python</a>,    <a href="http://yumebayashi.github.io/note/tag/mecab.html">mecab</a>,    <a href="http://yumebayashi.github.io/note/tag/opencv.html">opencv</a>,    <a href="http://yumebayashi.github.io/note/tag/narrativeclip.html">narrativeclip</a>  </section>
+    <a href="http://yumebayashi.github.io/note/tag/linux.html">linux</a>,    <a href="http://yumebayashi.github.io/note/tag/postgres.html">postgres</a>,    <a href="http://yumebayashi.github.io/note/tag/gadget.html">gadget</a>,    <a href="http://yumebayashi.github.io/note/tag/query.html">query</a>,    <a href="http://yumebayashi.github.io/note/tag/eyetribe.html">eyetribe</a>,    <a href="http://yumebayashi.github.io/note/tag/sql.html">sql</a>,    <a href="http://yumebayashi.github.io/note/tag/narrativeclip.html">narrativeclip</a>,    <a href="http://yumebayashi.github.io/note/tag/python.html">python</a>,    <a href="http://yumebayashi.github.io/note/tag/gradle.html">gradle</a>,    <a href="http://yumebayashi.github.io/note/tag/q.html">q</a>,    <a href="http://yumebayashi.github.io/note/tag/opencv.html">opencv</a>,    <a href="http://yumebayashi.github.io/note/tag/redshift.html">redshift</a>,    <a href="http://yumebayashi.github.io/note/tag/java.html">java</a>,    <a href="http://yumebayashi.github.io/note/tag/s3.html">s3</a>,    <a href="http://yumebayashi.github.io/note/tag/chrome.html">chrome</a>,    <a href="http://yumebayashi.github.io/note/tag/mysql.html">mysql</a>,    <a href="http://yumebayashi.github.io/note/tag/shell.html">shell</a>,    <a href="http://yumebayashi.github.io/note/tag/script.html">script</a>,    <a href="http://yumebayashi.github.io/note/tag/mecab.html">mecab</a>  </section>
 
 
 
